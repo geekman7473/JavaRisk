@@ -1,5 +1,6 @@
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 public class Territory {
@@ -56,5 +57,11 @@ public class Territory {
 	public Continent getContinentParent() {
 		return continentParent;
 	}
-
+	public Integer[] attack(Territory target){
+		//r[0] = the number of attacking dice
+		//r[1] = the number of defending dice
+		//r[2] - r[2 + r[0]] = the results of attacking dice
+		//r[2 + r[0]] - r[2 + r[0] + r[1]] = the results of defending
+		return null;
+	}
 }
