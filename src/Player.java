@@ -15,13 +15,7 @@ public class Player {
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public Color getPlayCol() {
 		return playCol;
-	}
-	public void setPlayCol(Color playCol) {
-		this.playCol = playCol;
 	}
 }

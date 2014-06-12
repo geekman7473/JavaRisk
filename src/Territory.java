@@ -32,26 +32,14 @@ public class Territory {
 	public int getID() {
 		return ID;
 	}
-	public void setID(int iD) {
-		ID = iD;
-	}
 	public JButton getButton() {
 		return button;
-	}
-	public void setButton(JButton button) {
-		this.button = button;
 	}
 	public JLabel getTroopCountLabel() {
 		return troopCount;
 	}
-	public void setTroopCountLabel(JLabel troopCount) {
-		this.troopCount = troopCount;
-	}
 	public String getName() {
 		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	public Player getOwnedBy() {
 		return ownedBy;
@@ -67,9 +55,6 @@ public class Territory {
 	}
 	public Continent getContinentParent() {
 		return continentParent;
-	}
-	public void setContinentParent(Continent continentParent) {
-		this.continentParent = continentParent;
 	}
 
 }

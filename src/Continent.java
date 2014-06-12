@@ -13,13 +13,7 @@ public class Continent {
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public int getOwnershipBonus() {
 		return ownershipBonus;
-	}
-	public void setOwnershipBonus(int ownershipBonus) {
-		this.ownershipBonus = ownershipBonus;
 	}
 }
