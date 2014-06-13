@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,7 +17,7 @@ public class Territory {
 		button = new JButton();
 		button.setSize(15,15);
 		button.setLocation(x,y);
-		button.setText(_name);
+		button.setToolTipText(_name);
 		name = _name;
 		continentParent = parCon;
 		ID = _ID;
@@ -57,11 +59,7 @@ public class Territory {
 	public Continent getContinentParent() {
 		return continentParent;
 	}
-	public Integer[] attack(Territory target){
-		//r[0] = the number of attacking dice
-		//r[1] = the number of defending dice
-		//r[2] - r[2 + r[0]] = the results of attacking dice
-		//r[2 + r[0]] - r[2 + r[0] + r[1]] = the results of defending
-		return null;
+	public AttackResult attack(Territory target){
+		
 	}
 }
