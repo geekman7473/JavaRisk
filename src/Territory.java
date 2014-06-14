@@ -60,6 +60,35 @@ public class Territory {
 		return continentParent;
 	}
 	public AttackResult attack(Territory target){
+		//assumes that troop strength of attacking territory is > 1
+		Integer[] aDice, dDice;
+		if(troopStrength > 3){
+			aDice = new Integer[3];
+		} else{
+			aDice = new Integer[troopStrength - 1];
+		}
 		
+		if(target.getTroopStrength() > 3){
+			dDice = new Integer[3];
+		} else{
+			dDice = new Integer[target.getTroopStrength() - 1];
+		}
+		
+		for(int i = 0; i < aDice.length; i++){
+			aDice[i] = Util.diceRoll();
+		}
+		for(int i = 0; i < dDice.length; i++){
+			dDice[i] = Util.diceRoll();
+		}
+		AttackResult res = new AttackResult(aDice,dDice);
+		troopStrength -= res.getAttackerLosses();
+		target.troopStrength -= res.getDefenderLosses();
+		
+		if(target.troopStrength <= 0){
+			target.troopStrength = 0;
+			target.setOwnedBy(this.ownedBy);
+		}
+		
+		return res;
 	}
 }

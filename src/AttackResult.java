@@ -14,8 +14,8 @@ public class AttackResult {
 		DefenderLosses = 0;
 	}
 	public AttackResult(Integer[] attackDice, Integer[] defendDice){
-		attackingDice = popList(attackDice);
-		defendingDice = popList(defendDice);
+		attackingDice = Util.popList(attackDice);
+		defendingDice = Util.popList(defendDice);
 		Collections.sort(attackingDice);
 		Collections.sort(defendingDice);
 		for(int i = 0; i < Math.min(attackingDice.size(), defendingDice.size()); i++){
@@ -40,12 +40,5 @@ public class AttackResult {
 	}
 	public Integer getDefenderLosses() {
 		return DefenderLosses;
-	}
-	private ArrayList<Integer> popList(Integer[] a){
-		ArrayList<Integer> temp = new ArrayList<Integer>();
-		for(Integer x: a){
-			temp.add(x);
-		}
-		return temp;
 	}
 }
