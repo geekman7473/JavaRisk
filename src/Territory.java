@@ -56,6 +56,7 @@ public class Territory {
 	}
 	public void setOwnedBy(Player ownedBy) {
 		this.ownedBy = ownedBy;
+		button.setForeground(ownedBy.getPlayCol());
 	}
 	public int getTroopStrength() {
 		return troopStrength;
