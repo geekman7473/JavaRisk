@@ -11,9 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class Graphics {
+
+	static JFrame frame = new JFrame("JavaRisk");
+
 	public static void main(String[]args) throws HeadlessException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException, ClassNotFoundException{	
 		//Frame
-		JFrame frame = new JFrame("JavaRisk");
 		frame.setSize(750, 650);
 		frame.setLocation(50, 50);
 		
@@ -30,6 +32,7 @@ public class Graphics {
 		for(final Territory i: territory){
 			//Add button
 			board.add(i.getButton());
+			//board.add(i.getTroopCountLabel());
 			
 			//Button ActionListener
 			i.getButton().addActionListener(new ActionListener()
@@ -55,7 +58,7 @@ public class Graphics {
 			numPlayers = Integer.valueOf((String) JOptionPane.showInputDialog(frame, "How many players?", "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null));
 		} while (numPlayers > 6 || numPlayers < 2);
 		
-		Object[] colors = {"BLUE", "CYAN", "DARK_GRAY", "GRAY", "GREEN", "LIGHT_GRAY", "MAGENTA", "ORANGE", "PINK", "RED", "WHITE", "YELLOW"};
+		Object[] colors = {"BLUE", "CYAN", "GREEN", "MAGENTA", "ORANGE", "PINK", "RED", "YELLOW"};
 		for(int i=1 ; i<=numPlayers; i++){
 			player.add(new Player((String) JOptionPane.showInputDialog(frame, "Player " + i + " name?", "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null), (Color)Class.forName("java.awt.Color").getField((String) JOptionPane.showInputDialog(frame, "Player " + i + " color?", "Setup", JOptionPane.PLAIN_MESSAGE, null, colors, null)).get(null)));
 			System.out.println(player.size());
@@ -64,6 +67,7 @@ public class Graphics {
 				if((player.get(i-1).getName().equals(player.get(j-1).getName()) || player.get(i-1).getPlayCol().equals(player.get(j-1).getPlayCol())) && i!=j){
 					i--;
 					player.remove(player.size()-1);
+					JOptionPane.showMessageDialog(frame, "Different player values cannot be the same.");
 					break;
 				}
 			}			
