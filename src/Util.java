@@ -13,7 +13,7 @@ public class Util {
 	public static Integer diceRoll(){
 		return (int)Math.round((Math.random() * 6));
 	}
-	public boolean allTerritoriesTaken(Territory[] a){
+	public static boolean allTerritoriesTaken(Territory[] a){
 		for(int i = 0; i < a.length; i++){
 			if(a[i].getOwnedBy().getPlayCol() == new Color(0,0,0)){
 				return false;

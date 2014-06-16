@@ -72,18 +72,20 @@ public class Graphics {
 		t[40].addNeighbors(new Territory[]{t[39], t[41], t[38]});
 		t[41].addNeighbors(new Territory[]{t[38], t[40], t[39]});
 		
-		for(final Territory i: territory){
+		for(final Territory t: territory){
 			//Add button
-			board.add(i.getButton());
-			board.add(i.getTroopCountLabel());
+			board.add(t.getButton());
+			board.add(t.getTroopCountLabel());
 			
+			/*
 			//Button ActionListener
-			i.getButton().addActionListener(new ActionListener()
+			t.getButton().addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent arg0) {
-					System.out.println(i.getName());
+					System.out.println(t.getName());
 				}
 			});
+			*/
 		}		
 		
 		//Frame settings
@@ -92,7 +94,6 @@ public class Graphics {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		/*
 		//Players
 		ArrayList<Player> player = new ArrayList<Player>();
 		
@@ -116,7 +117,22 @@ public class Graphics {
 				}
 			}			
 		}
-		*/
+		
+		//Add troops stage
+		for(final Player p: player){
+			do{
+				for(final Territory t: territory){
+					//Button ActionListener
+					t.getButton().addActionListener(new ActionListener()
+					{
+						public void actionPerformed(ActionEvent arg0) {
+							t.setOwnedBy(p);
+						}
+					});
+				}
+			} while(Util.allTerritoriesTaken(territory));
+		}
+
 
 	}
 }
