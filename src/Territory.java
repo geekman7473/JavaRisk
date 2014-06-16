@@ -15,6 +15,7 @@ public class Territory {
 	private Continent continentParent;
 	private ArrayList<Territory> neighbors;
 	public Territory(int x, int y, String _name, Continent parCon, int _ID){
+		troopStrength = 0;
 		button = new JButton();
 		button.setSize(15,15);
 		button.setLocation(x,y);
@@ -24,9 +25,9 @@ public class Territory {
 		ID = _ID;
 		troopStrength = 0;
 		ownedBy = new Player();
-		troopCount = new JLabel();
-		troopCount.setText("0");
-		troopCount.setLocation(x + 7, y + 20);
+		troopCount = new JLabel("0");
+		troopCount.setSize(20, 20);
+		troopCount.setLocation(x + 20, y);
 	}
 	public Territory(){
 		troopCount = new JLabel();
