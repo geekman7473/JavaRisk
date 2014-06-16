@@ -4,6 +4,9 @@ import java.util.ArrayList;
 public class Magister {
 	private int iterCount;
 	private ArrayList<Player> players;
+	public void AddPlayer(Player p){
+		players.add(p);
+	}
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
