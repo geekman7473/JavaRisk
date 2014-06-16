@@ -71,10 +71,10 @@ public class Graphics {
 		territory[40].addNeighbors(new Territory[]{territory[39], territory[41], territory[38]});
 		territory[41].addNeighbors(new Territory[]{territory[38], territory[40], territory[39]});
 		
-		for(final Territory l: territory){
+		for(final Territory t: territory){
 			//Add button
-			board.add(l.getButton());
-			board.add(l.getTroopCountLabel());
+			board.add(t.getButton());
+			board.add(t.getTroopCountLabel());
 			
 			/*
 			//Button ActionListener
@@ -116,7 +116,7 @@ public class Graphics {
 				}
 			}			
 		}
-		
+
 		//Claim territories stage
 		final int i = 0;
 			do{
@@ -131,7 +131,6 @@ public class Graphics {
 					});
 				}
 			} while(Util.allTerritoriesTaken(territory));
-
 
 	}
 }
