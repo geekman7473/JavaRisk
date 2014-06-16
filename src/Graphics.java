@@ -93,8 +93,11 @@ public class Graphics {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//Master class
+		final Magister Cesanek = new Magister();		
+		
 		//Players
-		ArrayList<Player> player = new ArrayList<Player>();
+		//ArrayList<Player> player = new ArrayList<Player>();
 		
 		//parent, message, title, message type, icon, options, default selected
 		int numPlayers = 0;
@@ -105,12 +108,12 @@ public class Graphics {
 		
 		Object[] colors = {"BLUE", "CYAN", "GREEN", "MAGENTA", "ORANGE", "PINK", "RED", "YELLOW"};
 		for(int i=1 ; i<=numPlayers; i++){
-			player.add(new Player((String) JOptionPane.showInputDialog(frame, "Player " + i + " name?", "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null), (Color)Class.forName("java.awt.Color").getField((String) JOptionPane.showInputDialog(frame, "Player " + i + " color?", "Setup", JOptionPane.PLAIN_MESSAGE, null, colors, null)).get(null)));
+			Cesanek.AddPlayer(new Player((String) JOptionPane.showInputDialog(frame, "Player " + i + " name?", "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null), (Color)Class.forName("java.awt.Color").getField((String) JOptionPane.showInputDialog(frame, "Player " + i + " color?", "Setup", JOptionPane.PLAIN_MESSAGE, null, colors, null)).get(null)));
 			
 			for(int j=1; j<=i; j++){
-				if((player.get(i-1).getName().equals(player.get(j-1).getName()) || player.get(i-1).getPlayCol().equals(player.get(j-1).getPlayCol())) && i!=j){
+				if((Cesanek.getPlayers().get(i-1).getName().equals(Cesanek.getPlayers().get(j-1).getName()) || Cesanek.getPlayers().get(i-1).getPlayCol().equals(Cesanek.getPlayers().get(j-1).getPlayCol())) && i!=j){
 					i--;
-					player.remove(player.size()-1);
+					Cesanek.getPlayers().remove(Cesanek.getPlayers().size()-1);
 					JOptionPane.showMessageDialog(frame, "Different player values cannot be the same.");
 					break;
 				}
@@ -118,19 +121,30 @@ public class Graphics {
 		}
 
 		//Claim territories stage
-		final int i = 0;
-			do{
-				for(final Territory l: territory){
-					//Button ActionListener
-					l.getButton().addActionListener(new ActionListener()
-					{
-						public void actionPerformed(ActionEvent arg0) {
-							l.setOwnedBy(player.get(i%player.size()));
-							i++;
-						}
-					});
+		ActionListener claimTerritories = new ActionListener(){	public void actionPerformed(ActionEvent arg0) {	} };
+		
+		for(final Territory t: territory){
+			claimTerritories = new ActionListener(){
+				public void actionPerformed(ActionEvent arg0) {
+					if(t.getOwnedBy().getPlayCol().equals(new Color(0,0,0))){
+						System.out.println("here");
+						t.setOwnedBy(Cesanek.currentPlayer());
+						t.setTroopStrength(t.getTroopStrength()+1);
+						//Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
+						Cesanek.nextTurn();
+					}
 				}
-			} while(Util.allTerritoriesTaken(territory));
+			};
+			t.getButton().addActionListener(claimTerritories);
+		}
+		
+		do{
+			//System.out.println(Cesanek.currentPlayer());
+		} while(Util.allTerritoriesTaken(territory));
+		
+		for(final Territory t: territory) t.getButton().removeActionListener(claimTerritories);
+		
+		System.out.println("done");
 
 	}
 }

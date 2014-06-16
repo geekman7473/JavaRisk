@@ -15,7 +15,7 @@ public class Util {
 	}
 	public static boolean allTerritoriesTaken(Territory[] a){
 		for(int i = 0; i < a.length; i++){
-			if(a[i].getOwnedBy().getPlayCol() == new Color(0,0,0)){
+			if(a[i].getOwnedBy().getPlayCol().equals(new Color(0,0,0))){
 				return false;
 			}
 		}
