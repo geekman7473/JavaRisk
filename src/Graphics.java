@@ -117,20 +117,20 @@ public class Graphics {
 			}			
 		}
 		
-		//Add troops stage
-		for(final Player p: player){
+		//Claim territories stage
+		final int i = 0;
 			do{
 				for(final Territory l: territory){
 					//Button ActionListener
 					l.getButton().addActionListener(new ActionListener()
 					{
 						public void actionPerformed(ActionEvent arg0) {
-							l.setOwnedBy(p);
+							l.setOwnedBy(player.get(i%player.size()));
+							i++;
 						}
 					});
 				}
 			} while(Util.allTerritoriesTaken(territory));
-		}
 
 
 	}
