@@ -71,10 +71,10 @@ public class Graphics {
 		territory[40].addNeighbors(new Territory[]{territory[39], territory[41], territory[38]});
 		territory[41].addNeighbors(new Territory[]{territory[38], territory[40], territory[39]});
 		
-		for(final Territory l: territory){
+		for(final Territory t: territory){
 			//Add button
-			board.add(l.getButton());
-			board.add(l.getTroopCountLabel());
+			board.add(t.getButton());
+			board.add(t.getTroopCountLabel());
 			
 			/*
 			//Button ActionListener
@@ -117,19 +117,25 @@ public class Graphics {
 			}			
 		}
 		
-		//Add troops stage
+		
+		//Adding troops stage
 		for(final Player p: player){
+			JOptionPane.showMessageDialog(frame, p.getName() + " please select the territories to which your troops are to be alloted.");
+			p.setTroops(50-5*player.size());
+			for(final Territory t: territory){
+				//Button ActionListener
+				t.getButton().addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent arg0) {
+						t.setOwnedBy(p);
+						t.setTroopStrength(t.getTroopStrength()+1);
+						p.setTroops(p.getTroops()-1);
+					}
+				});
+			}
 			do{
-				for(final Territory l: territory){
-					//Button ActionListener
-					l.getButton().addActionListener(new ActionListener()
-					{
-						public void actionPerformed(ActionEvent arg0) {
-							l.setOwnedBy(p);
-						}
-					});
-				}
-			} while(Util.allTerritoriesTaken(territory));
+				System.out.println(p.getTroops());
+			} while(p.getTroops()>0);
 		}
 
 
