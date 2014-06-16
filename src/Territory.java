@@ -89,7 +89,6 @@ public class Territory {
 			target.troopStrength = 0;
 			target.setOwnedBy(this.ownedBy);
 		}
-		
 		return res;
 	}
 	public ArrayList<Territory> getNeighbors() {
@@ -100,5 +99,13 @@ public class Territory {
 	}
 	public boolean isNeighbor(Territory t){
 		return neighbors.contains(t);
+	}
+	public void addNe(Territory t){
+		neighbors.add(t);
+	}
+	public void addNe(Territory[] t){
+		for(Territory x: t){
+			neighbors.add(x);
+		}
 	}
 }
