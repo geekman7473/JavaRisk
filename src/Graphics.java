@@ -28,6 +28,49 @@ public class Graphics {
 		//Territories
 		Continent continent[] = {new Continent("North America", 5), new Continent("South America", 2), new Continent("Europe", 5), new Continent("Africa", 3), new Continent("Asia", 7),  new Continent("Australia", 2)};
 		Territory territory[] = {new Territory(55, 76, "Alaska", continent[0], 0), new Territory(108, 112, "Alberta", continent[0], 1), new Territory(120, 234, "Central America", continent[0], 2), new Territory(170, 180, "Eastern United States", continent[0], 3), new Territory(252, 47, "Greenland", continent[0], 4), new Territory(111, 76, "Northwest Terriory", continent[0], 5), new Territory(162, 128, "Ontario", continent[0], 6), new Territory(210, 121, "Quebec", continent[0], 7), new Territory(111, 165, "Western United States", continent[0], 8), new Territory(188, 381, "Argentina", continent[1], 9), new Territory(223, 316, "Brazil", continent[1], 10), new Territory(181, 339, "Peru", continent[1], 11), new Territory(167, 272, "Venezuela", continent[1], 12), new Territory(297, 153, "Great Britain", continent[2], 13), new Territory(312, 99, "Iceland", continent[2], 14), new Territory(367, 160, "Northern Europe", continent[2], 15), new Territory(377, 80, "Scandanavia", continent[2], 16), new Territory(382, 208, "Sourthern Europe", continent[2], 17), new Territory(434, 117, "Ukraine", continent[2], 18), new Territory(320, 210, "Western Europe", continent[2], 19), new Territory(399, 363, "Congo", continent[3], 20), new Territory(423, 326, "East Africa", continent[3], 21), new Territory(390, 277, "Egypt", continent[3], 22), new Territory(470, 429, "Madagascar", continent[3], 23), new Territory(340, 300, "North Africa", continent[3], 24), new Territory(400, 422, "South Africa", continent[3], 25), new Territory(496, 177, "Afghanistan", continent[4], 26), new Territory(581, 215, "China", continent[4], 27), new Territory(533, 248, "India", continent[4], 28), new Territory(592, 123, "Irkutsk", continent[4], 29), new Territory(675, 177, "Japan", continent[4], 30), new Territory(655, 63, "Kamchatka", continent[4], 31), new Territory(448, 243, "Middle East", continent[4], 32), new Territory(596, 169, "Mongolia", continent[4], 33), new Territory(592, 275, "Siam", continent[4], 34), new Territory(544, 83, "Siberia", continent[4], 35), new Territory(503, 108, "Ural", continent[4], 36), new Territory(600, 64, "Yakutsk", continent[4], 37), new Territory(703, 424, "Eastern Australia", continent[5], 38), new Territory(611, 356, "Indonesia", continent[5], 39), new Territory(672, 339, "New Guinea", continent[5], 40), new Territory(636, 424, "Western Australia", continent[5], 41)};
+		Territory t[] = territory;
+		t[0].addNeighbors(new Territory[]{t[5], t[1], t[31]});
+		t[1].addNeighbors(new Territory[]{t[0], t[5], t[6], t[8]});
+		t[2].addNeighbors(new Territory[]{t[3], t[8], t[12]});
+		t[3].addNeighbors(new Territory[]{t[2], t[8], t[7], t[6]});
+		t[4].addNeighbors(new Territory[]{t[7], t[6], t[5], t[14]});
+		t[5].addNeighbors(new Territory[]{t[0], t[1], t[6], t[4]});
+		t[6].addNeighbors(new Territory[]{t[5], t[1], t[8], t[3], t[5], t[7], t[4]});
+		t[7].addNeighbors(new Territory[]{t[6], t[3], t[4]});
+		t[8].addNeighbors(new Territory[]{t[1], t[2], t[3], t[6]});
+		t[9].addNeighbors(new Territory[]{t[10], t[11]});
+		t[10].addNeighbors(new Territory[]{t[9], t[11], t[12]});
+		t[11].addNeighbors(new Territory[]{t[9], t[10], t[12]});
+		t[12].addNeighbors(new Territory[]{t[10], t[11], t[2]});
+		t[13].addNeighbors(new Territory[]{t[14], t[16], t[19], t[15]});
+		t[14].addNeighbors(new Territory[]{t[4], t[13], t[16]});
+		t[15].addNeighbors(new Territory[]{t[13], t[16], t[18], t[17], t[19]});
+		t[16].addNeighbors(new Territory[]{t[14], t[13], t[15], t[18]});
+		t[17].addNeighbors(new Territory[]{t[19], t[15], t[18], t[32], t[22], t[24]});
+		t[18].addNeighbors(new Territory[]{t[16], t[15], t[17], t[32], t[26], t[36]});
+		t[19].addNeighbors(new Territory[]{t[24], t[13], t[15], t[17]});
+		t[20].addNeighbors(new Territory[]{t[21], t[24], t[25]});
+		t[21].addNeighbors(new Territory[]{t[22], t[24], t[20], t[25], t[23],t[32]});
+		t[22].addNeighbors(new Territory[]{t[32], t[17], t[24], t[21]});
+		t[23].addNeighbors(new Territory[]{t[25], t[21]});
+		t[24].addNeighbors(new Territory[]{t[10], t[19], t[17], t[22], t[21], t[20]});
+		t[25].addNeighbors(new Territory[]{t[23], t[20], t[21]});
+		t[26].addNeighbors(new Territory[]{t[18], t[32], t[36], t[27], t[28]});
+		t[27].addNeighbors(new Territory[]{t[26], t[36], t[35], t[33], t[28], t[34]});
+		t[28].addNeighbors(new Territory[]{t[32], t[26], t[27], t[34]});
+		t[29].addNeighbors(new Territory[]{t[31], t[33], t[35], t[37]});
+		t[30].addNeighbors(new Territory[]{t[31], t[33]});
+		t[31].addNeighbors(new Territory[]{t[0], t[37], t[29], t[33], t[30]});
+		t[32].addNeighbors(new Territory[]{t[22], t[21], t[17], t[18], t[26], t[28]});
+		t[33].addNeighbors(new Territory[]{t[27], t[35], t[29], t[31], t[30]});
+		t[34].addNeighbors(new Territory[]{t[39], t[28], t[27]});
+		t[35].addNeighbors(new Territory[]{t[36], t[27], t[33], t[29], t[37]});
+		t[36].addNeighbors(new Territory[]{t[18], t[26], t[27], t[35]});
+		t[37].addNeighbors(new Territory[]{t[35], t[29], t[31]});
+		t[38].addNeighbors(new Territory[]{t[41], t[40]});
+		t[39].addNeighbors(new Territory[]{t[34], t[40], t[41]});
+		t[40].addNeighbors(new Territory[]{t[39], t[41], t[38]});
+		t[41].addNeighbors(new Territory[]{t[38], t[40], t[39]});
 		
 		for(final Territory i: territory){
 			//Add button

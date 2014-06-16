@@ -60,6 +60,7 @@ public class Territory {
 	}
 	public void setTroopStrength(int troopStrength) {
 		this.troopStrength = troopStrength;
+		troopCount.setText(Integer.valueOf(troopStrength).toString());
 	}
 	public Continent getContinentParent() {
 		return continentParent;
@@ -93,8 +94,9 @@ public class Territory {
 			target.troopStrength = 0;
 			target.setOwnedBy(this.ownedBy);
 			do {
-				target.troopStrength = Integer.valueOf((String) JOptionPane.showInputDialog(Graphics.frame, "How many reinforcements would you like to send?", "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null));
-			} while (target.troopStrength > 1 && target.troopStrength < this.troopStrength );
+				target.setTroopStrength(Integer.valueOf((String) JOptionPane.showInputDialog(Graphics.frame, "How many reinforcements would you like to send?", "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null)));
+			} while (target.getTroopStrength() < 1 || target.getTroopStrength() > this.troopStrength);
+			this.troopStrength -= target.getTroopStrength();
 		}
 		
 		return res;
@@ -108,10 +110,10 @@ public class Territory {
 	public boolean isNeighbor(Territory t){
 		return neighbors.contains(t);
 	}
-	public void addNe(Territory t){
+	public void addNeighbors(Territory t){
 		neighbors.add(t);
 	}
-	public void addNe(Territory[] t){
+	public void addNeighbors(Territory[] t){
 		for(Territory x: t){
 			neighbors.add(x);
 		}
