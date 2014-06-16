@@ -13,6 +13,7 @@ public class Territory {
 	private Player ownedBy;
 	private int troopStrength;
 	private Continent continentParent;
+	private ArrayList<Territory> neighbors;
 	public Territory(int x, int y, String _name, Continent parCon, int _ID){
 		button = new JButton();
 		button.setSize(15,15);
@@ -90,5 +91,14 @@ public class Territory {
 		}
 		
 		return res;
+	}
+	public ArrayList<Territory> getNeighbors() {
+		return neighbors;
+	}
+	public void setNeighbors(ArrayList<Territory> neighbors) {
+		this.neighbors = neighbors;
+	}
+	public boolean isNeighbor(Territory t){
+		return neighbors.contains(t);
 	}
 }
