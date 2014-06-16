@@ -17,7 +17,7 @@ public class Graphics {
 	public static void main(String[]args) throws HeadlessException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException, ClassNotFoundException{	
 		//Frame
 		frame.setSize(750, 650);
-		frame.setLocation(50, 50);
+		frame.setLocationRelativeTo(null);
 		
 		//Board
 		ImageIcon riskBoard = new ImageIcon("resources/Risk_board.png");
@@ -75,7 +75,7 @@ public class Graphics {
 		for(final Territory i: territory){
 			//Add button
 			board.add(i.getButton());
-			//board.add(i.getTroopCountLabel());
+			board.add(i.getTroopCountLabel());
 			
 			//Button ActionListener
 			i.getButton().addActionListener(new ActionListener()
@@ -92,6 +92,7 @@ public class Graphics {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		/*
 		//Players
 		ArrayList<Player> player = new ArrayList<Player>();
 		
@@ -99,12 +100,12 @@ public class Graphics {
 		int numPlayers = 0;
 		do {
 			numPlayers = Integer.valueOf((String) JOptionPane.showInputDialog(frame, "How many players?", "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null));
+			if (numPlayers > 6 || numPlayers < 2) JOptionPane.showMessageDialog(frame, "Invalid number of players.");
 		} while (numPlayers > 6 || numPlayers < 2);
 		
 		Object[] colors = {"BLUE", "CYAN", "GREEN", "MAGENTA", "ORANGE", "PINK", "RED", "YELLOW"};
 		for(int i=1 ; i<=numPlayers; i++){
 			player.add(new Player((String) JOptionPane.showInputDialog(frame, "Player " + i + " name?", "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null), (Color)Class.forName("java.awt.Color").getField((String) JOptionPane.showInputDialog(frame, "Player " + i + " color?", "Setup", JOptionPane.PLAIN_MESSAGE, null, colors, null)).get(null)));
-			System.out.println(player.size());
 			
 			for(int j=1; j<=i; j++){
 				if((player.get(i-1).getName().equals(player.get(j-1).getName()) || player.get(i-1).getPlayCol().equals(player.get(j-1).getPlayCol())) && i!=j){
@@ -115,6 +116,7 @@ public class Graphics {
 				}
 			}			
 		}
+		*/
 
 	}
 }
