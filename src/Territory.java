@@ -24,8 +24,12 @@ public class Territory {
 		ID = _ID;
 		troopStrength = 0;
 		ownedBy = new Player();
+		troopCount = new JLabel();
+		troopCount.setText("0");
+		troopCount.setLocation(x + 7, y + 20);
 	}
 	public Territory(){
+		troopCount = new JLabel();
 		button = new JButton();
 		name = "";
 		continentParent = new Continent();
@@ -88,7 +92,11 @@ public class Territory {
 		if(target.troopStrength <= 0){
 			target.troopStrength = 0;
 			target.setOwnedBy(this.ownedBy);
+			do {
+				target.troopStrength = Integer.valueOf((String) JOptionPane.showInputDialog(Graphics.frame, "How many reinforcements would you like to send?", "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null));
+			} while (target.troopStrength > 1 && target.troopStrength < this.troopStrength );
 		}
+		
 		return res;
 	}
 	public ArrayList<Territory> getNeighbors() {

@@ -55,7 +55,7 @@ public class Graphics {
 			numPlayers = Integer.valueOf((String) JOptionPane.showInputDialog(frame, "How many players?", "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null));
 		} while (numPlayers > 6 || numPlayers < 2);
 		
-		Object[] colors = {"BLUE", "CYAN", "DARK_GRAY", "GRAY", "GREEN", "LIGHT_GRAY", "MAGENTA", "ORANGE", "PINK", "RED", "WHITE", "YELLOW"};
+		Object[] colors = {"BLUE", "CYAN", "GREEN", "LIGHT_GRAY", "MAGENTA", "ORANGE", "PINK", "RED", "YELLOW"};
 		for(int i=1 ; i<=numPlayers; i++){
 			player.add(new Player((String) JOptionPane.showInputDialog(frame, "Player " + i + " name?", "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null), (Color)Class.forName("java.awt.Color").getField((String) JOptionPane.showInputDialog(frame, "Player " + i + " color?", "Setup", JOptionPane.PLAIN_MESSAGE, null, colors, null)).get(null)));
 			System.out.println(player.size());
