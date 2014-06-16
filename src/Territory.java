@@ -28,6 +28,7 @@ public class Territory {
 		troopCount = new JLabel("0");
 		troopCount.setSize(20, 20);
 		troopCount.setLocation(x + 20, y);
+		 neighbors = new ArrayList<Territory>();
 	}
 	public Territory(){
 		troopCount = new JLabel();
