@@ -1,13 +1,17 @@
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Graphics {
-	public static void main(String[]args){				
+	public static void main(String[]args) throws HeadlessException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException, ClassNotFoundException{	
 		//Frame
 		JFrame frame = new JFrame("JavaRisk");
 		frame.setSize(750, 650);
@@ -40,5 +44,29 @@ public class Graphics {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//Players
+		ArrayList<Player> player = new ArrayList<Player>();
+		
+		//parent, message, title, message type, icon, options, default selected
+		int numPlayers = 0;
+		do {
+			numPlayers = Integer.valueOf((String) JOptionPane.showInputDialog(frame, "How many players?", "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null));
+		} while (numPlayers > 6 || numPlayers < 2);
+		
+		Object[] colors = {"BLUE", "CYAN", "DARK_GRAY", "GRAY", "GREEN", "LIGHT_GRAY", "MAGENTA", "ORANGE", "PINK", "RED", "WHITE", "YELLOW"};
+		for(int i=1 ; i<=numPlayers; i++){
+			player.add(new Player((String) JOptionPane.showInputDialog(frame, "Player " + i + " name?", "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null), (Color)Class.forName("java.awt.Color").getField((String) JOptionPane.showInputDialog(frame, "Player " + i + " color?", "Setup", JOptionPane.PLAIN_MESSAGE, null, colors, null)).get(null)));
+			System.out.println(player.size());
+			
+			for(int j=1; j<=i; j++){
+				if((player.get(i-1).getName().equals(player.get(j-1).getName()) || player.get(i-1).getPlayCol().equals(player.get(j-1).getPlayCol())) && i!=j){
+					i--;
+					player.remove(player.size()-1);
+					break;
+				}
+			}			
+		}
+
 	}
 }
