@@ -117,6 +117,9 @@ public class Graphics {
 				}
 			}			
 		}
+		for(final Player p: Cesanek.getPlayers()){
+			p.setTroops(50-5*Cesanek.getPlayers().size());
+		}
 		
 		//Add button action listeners
 		for(final Territory t: territory){
@@ -125,21 +128,24 @@ public class Graphics {
 					System.out.println(t.toString());
 					if(t.getOwnedBy().getPlayCol().equals(new Color(0,0,0)) && Cesanek.getMode() == 0){
 						t.setOwnedBy(Cesanek.currentPlayer());
+						t.setTroopStrength(t.getTroopStrength()+1);
+						Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
 						Cesanek.nextTurn();
 					}
 					if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 1){
 						t.setTroopStrength(t.getTroopStrength()+1);
 						Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
-						if(Cesanek.currentPlayer().getTroops()==0) Cesanek.nextTurn();
+						Cesanek.nextTurn();
 					}
 				}
 			});
 		}
 		
+		
 		//Claim territories stage
-		JOptionPane.showMessageDialog(frame, "Select your territories, players.  The world is your oyster.  Which has been mutated to the point where it contains over 40 pearls.  Ouch.");
+		JOptionPane.showMessageDialog(frame, "Select your territories, players.  The world is your oyster.  Which has been mutated to the point where it contains over 40 pearls.  Ouch.", "Claim territories", JOptionPane.PLAIN_MESSAGE);
 		do{
-			
+			if(Util.allTerritoriesTaken(territory)) break;
 		} while(!Util.allTerritoriesTaken(territory));
 		
 		Cesanek.nextMode();
@@ -147,18 +153,17 @@ public class Graphics {
 		System.out.println("done 0");
 		
 		//Add troops stage
-		JOptionPane.showMessageDialog(frame, "Great!  Now add your troops.  A well-placed army means a well-placed empire.  Among the rest, I mean.  Assuming there are any left.  I won't judge if world domination is your thing.");
+		JOptionPane.showMessageDialog(frame, "Great!  Now add your troops.  A well-placed army means a well-placed empire.  Among the rest, I mean.  Assuming there are any left.  I won't judge if world domination is your thing.", "Add troops", JOptionPane.PLAIN_MESSAGE);
 		
-		for(final Player p: Cesanek.getPlayers()){
-			p.setTroops(50-5*Cesanek.getPlayers().size());
-		}
 		do{
-			System.out.println("meow");
+			if(Cesanek.getPlayers().get(Cesanek.getPlayers().size()-1).getTroops()==0) break;
 		} while(Cesanek.getPlayers().get(Cesanek.getPlayers().size()-1).getTroops()>0);
 		
 		Cesanek.nextMode();
 		
 		System.out.println("done 1");
+		
+		
 
 	}
 }

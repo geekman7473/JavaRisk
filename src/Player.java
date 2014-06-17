@@ -25,4 +25,9 @@ public class Player {
 	public void setTroops(int troops) {
 		this.troops = troops;
 	}
+	@Override
+	public String toString() {
+		return "Player [name=" + name + ", playCol=" + playCol + ", troops="
+				+ troops + "]";
+	}
 }

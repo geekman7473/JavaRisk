@@ -124,7 +124,9 @@ public class Territory {
 	}
 	@Override
 	public String toString() {
-		return "Territory [ID=" + ID + ", name=" + name + "]";
+		return "Territory [ID=" + ID + ", name=" + name + ", ownedBy="
+				+ ownedBy.toString() + "]";
 	}
+
 	
 }
