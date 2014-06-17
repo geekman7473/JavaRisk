@@ -23,7 +23,6 @@ public class Territory {
 		name = _name;
 		continentParent = parCon;
 		ID = _ID;
-		troopStrength = 0;
 		ownedBy = new Player();
 		troopCount = new JLabel("0");
 		troopCount.setSize(20, 20);
@@ -80,7 +79,9 @@ public class Territory {
 		
 		if(target.getTroopStrength() > 3){
 			dDice = new Integer[3];
-		} else{
+		} else if(target.getTroopStrength() == 1){
+			dDice = new Integer[1];
+		} else {
 			dDice = new Integer[target.getTroopStrength() - 1];
 		}
 		
@@ -91,7 +92,9 @@ public class Territory {
 			dDice[i] = Util.diceRoll();
 		}
 		AttackResult res = new AttackResult(aDice,dDice);
-		troopStrength -= res.getAttackerLosses();
+		System.out.println(aDice.length);
+		System.out.println(dDice.length);
+		this.troopStrength -= res.getAttackerLosses();
 		target.troopStrength -= res.getDefenderLosses();
 		
 		if(target.troopStrength <= 0){

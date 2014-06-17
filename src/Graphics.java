@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,7 +14,9 @@ import javax.swing.JOptionPane;
 public class Graphics {
 
 	static JFrame frame = new JFrame("JavaRisk");
-
+	public final static Continent continent[] = {new Continent("North America", 5, 9), new Continent("South America", 2, 4), new Continent("Europe", 5, 7), new Continent("Africa", 3, 6), new Continent("Asia", 7, 12),  new Continent("Australia", 2, 4)};
+	public final static Territory territory[] = {new Territory(45, 76, "Alaska", continent[0], 0), new Territory(108, 112, "Alberta", continent[0], 1), new Territory(120, 237, "Central America", continent[0], 2), new Territory(165, 180, "Eastern United States", continent[0], 3), new Territory(252, 47, "Greenland", continent[0], 4), new Territory(111, 76, "Northwest Terriory", continent[0], 5), new Territory(157, 128, "Ontario", continent[0], 6), new Territory(205, 121, "Quebec", continent[0], 7), new Territory(111, 165, "Western United States", continent[0], 8), new Territory(188, 381, "Argentina", continent[1], 9), new Territory(223, 316, "Brazil", continent[1], 10), new Territory(181, 339, "Peru", continent[1], 11), new Territory(167, 272, "Venezuela", continent[1], 12), new Territory(295, 153, "Great Britain", continent[2], 13), new Territory(305, 95, "Iceland", continent[2], 14), new Territory(367, 160, "Northern Europe", continent[2], 15), new Territory(377, 80, "Scandanavia", continent[2], 16), new Territory(370, 205, "Southern Europe", continent[2], 17), new Territory(434, 117, "Ukraine", continent[2], 18), new Territory(305, 225, "Western Europe", continent[2], 19), new Territory(399, 363, "Congo", continent[3], 20), new Territory(423, 326, "East Africa", continent[3], 21), new Territory(390, 277, "Egypt", continent[3], 22), new Territory(470, 429, "Madagascar", continent[3], 23), new Territory(340, 300, "North Africa", continent[3], 24), new Territory(400, 422, "South Africa", continent[3], 25), new Territory(496, 177, "Afghanistan", continent[4], 26), new Territory(581, 215, "China", continent[4], 27), new Territory(533, 248, "India", continent[4], 28), new Territory(592, 117, "Irkutsk", continent[4], 29), new Territory(677, 177, "Japan", continent[4], 30), new Territory(655, 63, "Kamchatka", continent[4], 31), new Territory(448, 243, "Middle East", continent[4], 32), new Territory(596, 169, "Mongolia", continent[4], 33), new Territory(588, 275, "Siam", continent[4], 34), new Territory(544, 83, "Siberia", continent[4], 35), new Territory(503, 108, "Ural", continent[4], 36), new Territory(600, 57, "Yakutsk", continent[4], 37), new Territory(680, 405, "Eastern Australia", continent[5], 38), new Territory(593, 356, "Indonesia", continent[5], 39), new Territory(662, 339, "New Guinea", continent[5], 40), new Territory(636, 424, "Western Australia", continent[5], 41)};
+	
 	public static void main(String[]args) throws HeadlessException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException, ClassNotFoundException{	
 		//Frame
 		frame.setSize(750, 650);
@@ -26,8 +29,7 @@ public class Graphics {
 		frame.add(board);
 		
 		//Territories
-		Continent continent[] = {new Continent("North America", 5), new Continent("South America", 2), new Continent("Europe", 5), new Continent("Africa", 3), new Continent("Asia", 7),  new Continent("Australia", 2)};
-		Territory territory[] = {new Territory(45, 76, "Alaska", continent[0], 0), new Territory(108, 112, "Alberta", continent[0], 1), new Territory(120, 237, "Central America", continent[0], 2), new Territory(165, 180, "Eastern United States", continent[0], 3), new Territory(252, 47, "Greenland", continent[0], 4), new Territory(111, 76, "Northwest Terriory", continent[0], 5), new Territory(157, 128, "Ontario", continent[0], 6), new Territory(205, 121, "Quebec", continent[0], 7), new Territory(111, 165, "Western United States", continent[0], 8), new Territory(188, 381, "Argentina", continent[1], 9), new Territory(223, 316, "Brazil", continent[1], 10), new Territory(181, 339, "Peru", continent[1], 11), new Territory(167, 272, "Venezuela", continent[1], 12), new Territory(295, 153, "Great Britain", continent[2], 13), new Territory(305, 95, "Iceland", continent[2], 14), new Territory(367, 160, "Northern Europe", continent[2], 15), new Territory(377, 80, "Scandanavia", continent[2], 16), new Territory(370, 205, "Southern Europe", continent[2], 17), new Territory(434, 117, "Ukraine", continent[2], 18), new Territory(305, 225, "Western Europe", continent[2], 19), new Territory(399, 363, "Congo", continent[3], 20), new Territory(423, 326, "East Africa", continent[3], 21), new Territory(390, 277, "Egypt", continent[3], 22), new Territory(470, 429, "Madagascar", continent[3], 23), new Territory(340, 300, "North Africa", continent[3], 24), new Territory(400, 422, "South Africa", continent[3], 25), new Territory(496, 177, "Afghanistan", continent[4], 26), new Territory(581, 215, "China", continent[4], 27), new Territory(533, 248, "India", continent[4], 28), new Territory(592, 117, "Irkutsk", continent[4], 29), new Territory(677, 177, "Japan", continent[4], 30), new Territory(655, 63, "Kamchatka", continent[4], 31), new Territory(448, 243, "Middle East", continent[4], 32), new Territory(596, 169, "Mongolia", continent[4], 33), new Territory(588, 275, "Siam", continent[4], 34), new Territory(544, 83, "Siberia", continent[4], 35), new Territory(503, 108, "Ural", continent[4], 36), new Territory(600, 57, "Yakutsk", continent[4], 37), new Territory(680, 405, "Eastern Australia", continent[5], 38), new Territory(593, 356, "Indonesia", continent[5], 39), new Territory(662, 339, "New Guinea", continent[5], 40), new Territory(636, 424, "Western Australia", continent[5], 41)};
+		
 		territory[0].addNeighbors(new Territory[]{territory[5], territory[1], territory[31]});
 		territory[1].addNeighbors(new Territory[]{territory[0], territory[5], territory[6], territory[8]});
 		territory[2].addNeighbors(new Territory[]{territory[3], territory[8], territory[12]});
@@ -96,7 +98,16 @@ public class Graphics {
 		//Master class
 		final Magister Cesanek = new Magister();
 		frame.add(Cesanek.getCurPlay());
-		
+		frame.add(Cesanek.getGameState());
+		final JButton endAttacks = new JButton();
+		endAttacks.setVisible(false);
+		endAttacks.setSize(100, 100);
+		endAttacks.setText("End Attack Phase");
+		endAttacks.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0){
+				Cesanek.setMode(5);
+			}
+		});
 		//Add players
 		//parent, message, title, message type, icon, options, default selected
 		int numPlayers = 0;
@@ -126,6 +137,7 @@ public class Graphics {
 		//Add button action listeners
 		for(final Territory t: territory){
 			t.getButton().addActionListener(new ActionListener(){
+				int lastTurnNum = -1;
 				public void actionPerformed(ActionEvent arg0) {
 					System.out.println(t.toString());
 					if(t.getOwnedBy().getPlayCol().equals(new Color(0,0,0)) && Cesanek.getMode() == 0){
@@ -133,10 +145,48 @@ public class Graphics {
 						t.setTroopStrength(t.getTroopStrength()+1);
 						Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
 						Cesanek.nextTurn();
-					}
-					if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 1){
+					}else if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 1){
 						t.setTroopStrength(t.getTroopStrength()+1);
 						Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
+						Cesanek.nextTurn();
+					}else if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 2){
+						if(lastTurnNum != Cesanek.getTurnCount()){
+							System.out.println("turns");
+							System.out.println(lastTurnNum);
+							System.out.println(Cesanek.getTurnCount());
+							Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().draftArmies(territory, continent));
+							lastTurnNum = Cesanek.getTurnCount();
+						}
+						t.setTroopStrength(t.getTroopStrength()+1);
+						Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
+						if(Cesanek.currentPlayer().getTroops() == 0){
+							Cesanek.nextMode();
+						}
+					}else if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 3){
+						endAttacks.setVisible(true);
+						Cesanek.attackSource = t;
+						Cesanek.nextMode();
+					}else if(!t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 4){
+						Cesanek.attackTarget = t;
+						while(!Cesanek.attackTarget.getOwnedBy().equals(Cesanek.attackSource.getOwnedBy()) && JOptionPane.showConfirmDialog(null, "Do you wish to attack " + Cesanek.attackTarget.getName() + "(Strength: " + Cesanek.attackTarget.getTroopStrength() + ") from " + Cesanek.attackSource.getName() + " (Strength: " + Cesanek.attackSource.getTroopStrength() + ")" , "Attack Confirmation", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+							if(Cesanek.attackSource.getTroopStrength() < 2){
+								JOptionPane.showMessageDialog(null, "You cannot perform this attack because you do not have enough armies in " + Cesanek.attackSource.getName());
+							} else {
+								Cesanek.attackSource.attack(Cesanek.attackTarget);
+							}
+						}
+						Cesanek.setMode(3);
+					} else if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 5){
+						Cesanek.attackSource = t;
+						Cesanek.nextMode();
+					} else if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 6){
+						Cesanek.attackTarget = t;
+						int temp = Cesanek.attackTarget.getTroopStrength();
+						do {
+							Cesanek.attackTarget.setTroopStrength(Integer.valueOf((String) JOptionPane.showInputDialog(Graphics.frame, "How many reinforcements would you like to send?", "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null)));
+						} while (Cesanek.attackTarget.getTroopStrength() < 1 || Cesanek.attackTarget.getTroopStrength() > Cesanek.attackSource.getTroopStrength());
+						Cesanek.attackSource.setTroopStrength(Cesanek.attackSource.getTroopStrength() - (Cesanek.attackTarget.getTroopStrength() - temp));
+						Cesanek.nextMode();
 						Cesanek.nextTurn();
 					}
 				}
@@ -164,7 +214,6 @@ public class Graphics {
 		System.out.println("done 1");
 		
 		while(!Util.gameOver(territory)){
-			
 		}
 
 	}

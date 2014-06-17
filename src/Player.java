@@ -30,4 +30,33 @@ public class Player {
 		return "Player [name=" + name + ", playCol=" + playCol + ", troops="
 				+ troops + "]";
 	}
+	public int draftArmies(Territory[] a, Continent[] c){
+		int terOwned = 0;
+		int retVal = 0;
+		for(Territory I: a){
+			if(I.getOwnedBy().equals(this)){
+				terOwned++;
+			}
+		}
+		if(terOwned / 3 < 3){
+			retVal += 3;
+		} else {
+			retVal += terOwned /3;
+		}
+		boolean contOwn = true;
+		for(Continent J: c){
+			contOwn = true;
+			for(Territory I: a){
+				if(I.getContinentParent().equals(J)){
+					if(!I.getOwnedBy().equals(this)){
+						contOwn = false;
+					}
+				}
+			}
+			if(contOwn){
+				retVal += J.getOwnershipBonus();
+			}
+		}
+		return retVal;
+	}
 }

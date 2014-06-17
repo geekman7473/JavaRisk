@@ -16,13 +16,15 @@ public class AttackResult {
 	public AttackResult(Integer[] attackDice, Integer[] defendDice){
 		attackingDice = Util.popList(attackDice);
 		defendingDice = Util.popList(defendDice);
+		AttackerLosses = 0;
+		DefenderLosses = 0;
 		Collections.sort(attackingDice);
 		Collections.sort(defendingDice);
 		for(int i = 0; i < Math.min(attackingDice.size(), defendingDice.size()); i++){
 			if(attackingDice.get(i) > defendingDice.get(i)){
 				DefenderLosses++;
 			} else {
-				AttackerLosses--;
+				AttackerLosses++;
 			}
 		}
 	}
