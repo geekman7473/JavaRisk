@@ -96,6 +96,7 @@ public class Graphics {
 		//Master class
 		final Magister Cesanek = new Magister();
 		frame.add(Cesanek.getCurPlay());
+		
 		//Add players
 		//parent, message, title, message type, icon, options, default selected
 		int numPlayers = 0;
@@ -142,11 +143,10 @@ public class Graphics {
 			});
 		}
 		
-		
 		//Claim territories stage
 		JOptionPane.showMessageDialog(frame, "Select your territories, players.  The world is your oyster.  Which has been mutated to the point where it contains over 40 pearls.  Ouch.", "Claim territories", JOptionPane.PLAIN_MESSAGE);
 		do{
-			if(Util.allTerritoriesTaken(territory)) break;
+			frame.repaint();
 		} while(!Util.allTerritoriesTaken(territory));
 		
 		Cesanek.nextMode();
@@ -157,7 +157,7 @@ public class Graphics {
 		JOptionPane.showMessageDialog(frame, "Great!  Now add your troops.  A well-placed army means a well-placed empire.  Among the rest, I mean.  Assuming there are any left.  I won't judge if world domination is your thing.", "Add troops", JOptionPane.PLAIN_MESSAGE);
 		
 		do{
-			if(Cesanek.getPlayers().get(Cesanek.getPlayers().size()-1).getTroops()==0) break;
+			frame.repaint();
 		} while(Cesanek.getPlayers().get(Cesanek.getPlayers().size()-1).getTroops()>0);
 		
 		Cesanek.nextMode();
