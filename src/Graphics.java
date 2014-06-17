@@ -161,10 +161,11 @@ public class Graphics {
 		} while(Cesanek.getPlayers().get(Cesanek.getPlayers().size()-1).getTroops()>0);
 		
 		Cesanek.nextMode();
-		
 		System.out.println("done 1");
 		
-		
+		while(!Util.gameOver(territory)){
+			
+		}
 
 	}
 }

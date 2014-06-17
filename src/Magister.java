@@ -29,6 +29,9 @@ public class Magister {
 	}
 	public void nextMode(){
 		mode++;
+		if(mode > 4){
+			mode = 2;
+		}
 		//0 = claim territories
 		//1 = add troops
 		//2 = 
