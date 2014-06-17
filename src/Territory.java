@@ -122,4 +122,9 @@ public class Territory {
 			neighbors.add(x);
 		}
 	}
+	@Override
+	public String toString() {
+		return "Territory [ID=" + ID + ", name=" + name + "]";
+	}
+	
 }

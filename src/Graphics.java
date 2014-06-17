@@ -94,11 +94,9 @@ public class Graphics {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//Master class
-		final Magister Cesanek = new Magister();		
+		final Magister Cesanek = new Magister();
 		
-		//Players
-		//ArrayList<Player> player = new ArrayList<Player>();
-		
+		//Add players
 		//parent, message, title, message type, icon, options, default selected
 		int numPlayers = 0;
 		do {
@@ -119,32 +117,48 @@ public class Graphics {
 				}
 			}			
 		}
-
-		//Claim territories stage
-		ActionListener claimTerritories = new ActionListener(){	public void actionPerformed(ActionEvent arg0) {	} };
 		
+		//Add button action listeners
 		for(final Territory t: territory){
-			claimTerritories = new ActionListener(){
+			t.getButton().addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent arg0) {
-					if(t.getOwnedBy().getPlayCol().equals(new Color(0,0,0))){
-						System.out.println("here");
+					System.out.println(t.toString());
+					if(t.getOwnedBy().getPlayCol().equals(new Color(0,0,0)) && Cesanek.getMode() == 0){
 						t.setOwnedBy(Cesanek.currentPlayer());
-						t.setTroopStrength(t.getTroopStrength()+1);
-						//Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
 						Cesanek.nextTurn();
 					}
+					if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 1){
+						t.setTroopStrength(t.getTroopStrength()+1);
+						Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
+						if(Cesanek.currentPlayer().getTroops()==0) Cesanek.nextTurn();
+					}
 				}
-			};
-			t.getButton().addActionListener(claimTerritories);
+			});
 		}
 		
+		//Claim territories stage
+		JOptionPane.showMessageDialog(frame, "Select your territories, players.  The world is your oyster.  Which has been mutated to the point where it contains over 40 pearls.  Ouch.");
 		do{
-			//System.out.println(Cesanek.currentPlayer());
-		} while(Util.allTerritoriesTaken(territory));
+			
+		} while(!Util.allTerritoriesTaken(territory));
 		
-		for(final Territory t: territory) t.getButton().removeActionListener(claimTerritories);
+		Cesanek.nextMode();
 		
-		System.out.println("done");
+		System.out.println("done 0");
+		
+		//Add troops stage
+		JOptionPane.showMessageDialog(frame, "Great!  Now add your troops.  A well-placed army means a well-placed empire.  Among the rest, I mean.  Assuming there are any left.  I won't judge if world domination is your thing.");
+		
+		for(final Player p: Cesanek.getPlayers()){
+			p.setTroops(50-5*Cesanek.getPlayers().size());
+		}
+		do{
+			System.out.println("meow");
+		} while(Cesanek.getPlayers().get(Cesanek.getPlayers().size()-1).getTroops()>0);
+		
+		Cesanek.nextMode();
+		
+		System.out.println("done 1");
 
 	}
 }
