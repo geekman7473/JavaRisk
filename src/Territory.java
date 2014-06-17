@@ -71,21 +71,23 @@ public class Territory {
 	public AttackResult attack(Territory target){
 		//assumes that troop strength of attacking territory is > 1
 		Integer[] aDice, dDice;
+
 		if(this.troopStrength > 3){
 			aDice = new Integer[3];
 		} else{
 			aDice = new Integer[this.troopStrength - 1];
 		}
-		
+
 		if(target.getTroopStrength() > 1){
 			dDice = new Integer[2];
 		} else {
 			dDice = new Integer[1];
 		}
-
+		System.out.println("Attack dice");
 		for(int i = 0; i < aDice.length; i++){
 			aDice[i] = Util.diceRoll();
 		}
+		System.out.println("Defense Dice");
 		for(int i = 0; i < dDice.length; i++){
 			dDice[i] = Util.diceRoll();
 		}

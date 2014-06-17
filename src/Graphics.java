@@ -241,9 +241,9 @@ public class Graphics {
 		
 		System.out.println("done 1");
 		
-		
-		//Debug mode - remark out previous two modes
 		/*
+		//Debug mode - remark out previous two modes
+		
 		territory[0].setOwnedBy(Cesanek.getPlayers().get(0));
 		territory[0].setTroopStrength(40);
 		territory[1].setOwnedBy(Cesanek.getPlayers().get(1));
