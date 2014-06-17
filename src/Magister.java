@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Magister {
 	private int iterCount;
 	private ArrayList<Player> players;
+	private int mode;
 	public void AddPlayer(Player p){
 		players.add(p);
 	}
@@ -21,6 +22,20 @@ public class Magister {
 	}
 	public int turnNum(){
 		return iterCount;
+	}
+	public void nextMode(){
+		mode++;
+		//0 = claim territories
+		//1 = add troops
+		//2 = 
+		//3 = 
+		//4 = 
+	}
+	public int getMode() {
+		return mode;
+	}
+	public void setMode(int mode) {
+		this.mode = mode;
 	}
 	Magister(){
 		iterCount = 0;
