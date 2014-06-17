@@ -3,7 +3,6 @@ import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -76,16 +75,6 @@ public class Graphics {
 			//Add button
 			board.add(t.getButton());
 			board.add(t.getTroopCountLabel());
-			
-			/*
-			//Button ActionListener
-			t.getButton().addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent arg0) {
-					System.out.println(t.getName());
-				}
-			});
-			*/
 		}		
 		
 		//Frame settings
@@ -110,25 +99,25 @@ public class Graphics {
 		frame.add(endAttacks);
 		
 		//Welcome players
-		JOptionPane.showMessageDialog(frame, new JLabel("Bienvenue dans le jeu du risque!  Jouir!", JLabel.CENTER), "Welome", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Bienvenue dans le jeu du risque!  Jouir!</center></html>", JLabel.CENTER), "Welome", JOptionPane.PLAIN_MESSAGE);
 		
 		//Add players
 		//parent, message, title, message type, icon, options, default selected
 		int numPlayers = 0;
 		do {
-			numPlayers = Integer.valueOf((String) JOptionPane.showInputDialog(frame, new JLabel("How many players?", JLabel.CENTER), "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null));
-			if (numPlayers > 6 || numPlayers < 2) JOptionPane.showMessageDialog(frame, new JLabel("Invalid number of players.", JLabel.CENTER));
+			numPlayers = Integer.valueOf((String) JOptionPane.showInputDialog(frame, new JLabel("<html><center>How many players?</center></html>", JLabel.CENTER), "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null));
+			if (numPlayers > 6 || numPlayers < 2) JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Invalid number of players.</center></html>", JLabel.CENTER));
 		} while (numPlayers > 6 || numPlayers < 2);
 		
 		Object[] colors = {"BLUE", "CYAN", "GREEN", "MAGENTA", "ORANGE", "PINK", "RED", "YELLOW"};
 		for(int i=1 ; i<=numPlayers; i++){
-			Cesanek.AddPlayer(new Player((String) JOptionPane.showInputDialog(frame, new JLabel("Player " + i + " name?", JLabel.CENTER), "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null), (Color)Class.forName("java.awt.Color").getField((String) JOptionPane.showInputDialog(frame, new JLabel("Player " + i + " color?", JLabel.CENTER), "Setup", JOptionPane.PLAIN_MESSAGE, null, colors, null)).get(null)));
+			Cesanek.AddPlayer(new Player((String) JOptionPane.showInputDialog(frame, new JLabel("<html><center>Player " + i + " name?</center></html>", JLabel.CENTER), "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null), (Color)Class.forName("java.awt.Color").getField((String) JOptionPane.showInputDialog(frame, new JLabel("<html><center>Player " + i + " color?</center></html>", JLabel.CENTER), "Setup", JOptionPane.PLAIN_MESSAGE, null, colors, null)).get(null)));
 			
 			for(int j=1; j<=i; j++){
 				if((Cesanek.getPlayers().get(i-1).getName().equals(Cesanek.getPlayers().get(j-1).getName()) || Cesanek.getPlayers().get(i-1).getPlayCol().equals(Cesanek.getPlayers().get(j-1).getPlayCol())) && i!=j){
 					i--;
 					Cesanek.getPlayers().remove(Cesanek.getPlayers().size()-1);
-					JOptionPane.showMessageDialog(frame, new JLabel("Different player values cannot be the same.", JLabel.CENTER));
+					JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Different player values cannot be the same.</center></html>", JLabel.CENTER));
 					break;
 				}
 			}			
@@ -137,7 +126,7 @@ public class Graphics {
 		for(final Player p: Cesanek.getPlayers()){
 			p.setTroops(50-5*Cesanek.getPlayers().size());
 		}
-
+		
 		//Add button action listeners
 		for(final Territory t: territory){
 			t.getButton().addActionListener(new ActionListener(){
@@ -171,9 +160,9 @@ public class Graphics {
 						Cesanek.nextMode();
 					} else if(!t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 4){
 						Cesanek.attackTarget = t;
-						while(!Cesanek.attackTarget.getOwnedBy().equals(Cesanek.attackSource.getOwnedBy()) && JOptionPane.showConfirmDialog(null, "Do you wish to attack " + Cesanek.attackTarget.getName() + "(Strength: " + Cesanek.attackTarget.getTroopStrength() + ") from " + Cesanek.attackSource.getName() + " (Strength: " + Cesanek.attackSource.getTroopStrength() + ")" , "Attack Confirmation", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+						while(!Cesanek.attackTarget.getOwnedBy().equals(Cesanek.attackSource.getOwnedBy()) && JOptionPane.showConfirmDialog(frame, "Do you wish to attack " + Cesanek.attackTarget.getName() + " (Strength: " + Cesanek.attackTarget.getTroopStrength() + ") from " + Cesanek.attackSource.getName() + " (Strength: " + Cesanek.attackSource.getTroopStrength() + ")" , "Attack Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.YES_NO_OPTION, new ImageIcon("resources/Die.png")) == JOptionPane.YES_OPTION){
 							if(Cesanek.attackSource.getTroopStrength() < 2){
-								JOptionPane.showMessageDialog(null, "You cannot perform this attack because you do not have enough armies in " + Cesanek.attackSource.getName());
+								JOptionPane.showMessageDialog(frame, "You cannot perform this attack because you do not have enough armies in " + Cesanek.attackSource.getName());
 							} else {
 								Cesanek.attackSource.attack(Cesanek.attackTarget);
 							}
@@ -186,7 +175,7 @@ public class Graphics {
 						Cesanek.attackTarget = t;
 						int temp = Cesanek.attackTarget.getTroopStrength();
 						do {
-							Cesanek.attackTarget.setTroopStrength(Integer.valueOf((String) JOptionPane.showInputDialog(Graphics.frame, new JLabel("How many reinforcements would you like to send?", JLabel.CENTER), "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null)));
+							Cesanek.attackTarget.setTroopStrength(Integer.valueOf((String) JOptionPane.showInputDialog(frame, new JLabel("<html><center>How many reinforcements would you like to send?</center></html>", JLabel.CENTER), "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null)));
 						} while (Cesanek.attackTarget.getTroopStrength() < 1 || Cesanek.attackTarget.getTroopStrength() > Cesanek.attackSource.getTroopStrength());
 						Cesanek.attackSource.setTroopStrength(Cesanek.attackSource.getTroopStrength() - (Cesanek.attackTarget.getTroopStrength() - temp));
 						Cesanek.nextMode();
@@ -197,7 +186,7 @@ public class Graphics {
 		}
 		
 		//Claim territories stage
-		JOptionPane.showMessageDialog(frame, new JLabel("Select your territories, players. \n The world is your oyster. \n Which has been mutated to the point where it contains over 40 pearls. \n Ouch.", JLabel.CENTER), "Claim territories", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Select your territories, players. <br> The world is your oyster. <br> Which has been mutated to the point where it contains over 40 pearls. <br> Ouch.</center></html>", JLabel.CENTER), "Claim territories", JOptionPane.PLAIN_MESSAGE);
 		
 		do{
 			frame.repaint();
@@ -208,7 +197,7 @@ public class Graphics {
 		System.out.println("done 0");
 		
 		//Add troops stage
-		JOptionPane.showMessageDialog(frame, new JLabel("Great! \n Now add your troops. /n  A well-placed army means a well-placed empire. \n Among the rest, I mean. \n Assuming there are any left. \n I won't judge if world domination is your thing.", JLabel.CENTER), "Add troops", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Great! <br> Now add your troops. <br> A well-placed army means a well-placed empire. <br> Among the rest, I mean. <br> Assuming there are any left. <br> I won't judge if world domination is your thing.</center></html>", JLabel.CENTER), "Add troops", JOptionPane.PLAIN_MESSAGE);
 		
 		do{
 			frame.repaint();
@@ -218,8 +207,17 @@ public class Graphics {
 		
 		System.out.println("done 1");
 		
+		//Debug mode - remark out previous two modes
+		/*
+		territory[0].setOwnedBy(Cesanek.getPlayers().get(0));
+		territory[0].setTroopStrength(40);
+		territory[1].setOwnedBy(Cesanek.getPlayers().get(1));
+		territory[1].setTroopStrength(40);
+		Cesanek.setMode(3);
+		*/
+		
 		//Begin game
-		JOptionPane.showMessageDialog(frame, new JLabel("Fantastic.  Let the game begin!", JLabel.CENTER), "Initium", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Fantastic.  Let the game begin!</center></html>", JLabel.CENTER), "Initium", JOptionPane.PLAIN_MESSAGE);
 
 		while(!Util.gameOver(territory)){
 			frame.repaint();
@@ -231,6 +229,6 @@ public class Graphics {
 		}
 		
 		//End game
-		JOptionPane.showMessageDialog(frame, new JLabel("Congratulations " + territory[0].getOwnedBy().getName() + "!  You have won the game!", JLabel.CENTER), "Finis", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Congratulations " + territory[0].getOwnedBy().getName() + "!  You have won the game!</center></html>", JLabel.CENTER), "Finis", JOptionPane.PLAIN_MESSAGE);
 	}
 }
