@@ -178,14 +178,17 @@ public class Graphics {
 						Cesanek.nextMode();
 					} else if(!t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 4){
 						Cesanek.attackTarget = t;
-						while(!Cesanek.attackTarget.getOwnedBy().equals(Cesanek.attackSource.getOwnedBy()) && JOptionPane.showConfirmDialog(frame, "Do you wish to attack " + Cesanek.attackTarget.getName() + " (Strength: " + Cesanek.attackTarget.getTroopStrength() + ") from " + Cesanek.attackSource.getName() + " (Strength: " + Cesanek.attackSource.getTroopStrength() + ")" , "Attack Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.YES_NO_OPTION, new ImageIcon("resources/Die.png")) == JOptionPane.YES_OPTION){
-							if(Cesanek.attackSource.getTroopStrength() < 2){
-								JOptionPane.showMessageDialog(frame, new JLabel("<html><center>You cannot perform this attack because you do not have enough armies in" + Cesanek.attackSource.getName() + "</center></html>", JLabel.CENTER));
-							} else {
-								//Cesanek.stopAttackSound();
-								Cesanek.playAttackSound();
-								Cesanek.attackSource.attack(Cesanek.attackTarget);
-							}
+						if(Cesanek.attackSource.isNeighbor(t)){
+							while(!Cesanek.attackTarget.getOwnedBy().equals(Cesanek.attackSource.getOwnedBy()) && JOptionPane.showConfirmDialog(frame, "Do you wish to attack " + Cesanek.attackTarget.getName() + " (Strength: " + Cesanek.attackTarget.getTroopStrength() + ") from " + Cesanek.attackSource.getName() + " (Strength: " + Cesanek.attackSource.getTroopStrength() + ")" , "Attack Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.YES_NO_OPTION, new ImageIcon("resources/Die.png")) == JOptionPane.YES_OPTION){
+								if(Cesanek.attackSource.getTroopStrength() < 2){
+									JOptionPane.showMessageDialog(frame, new JLabel("<html><center>You cannot perform this attack because you do not have enough armies in" + Cesanek.attackSource.getName() + "</center></html>", JLabel.CENTER));
+								} else {
+									Cesanek.playAttackSound();
+									Cesanek.attackSource.attack(Cesanek.attackTarget);
+								}
+							}	
+						} else {
+							JOptionPane.showMessageDialog(frame, new JLabel("<html><center>You cannot perform this attack because " + Cesanek.attackSource.getName() + " is not adjacent to " + Cesanek.attackTarget.getName() +"</center></html>", JLabel.CENTER));
 						}
 						Cesanek.setMode(3);
 					} else if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 5){
@@ -193,17 +196,23 @@ public class Graphics {
 						Cesanek.nextMode();
 					} else if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 6){
 						Cesanek.attackTarget = t;
-						int temp = Cesanek.attackTarget.getTroopStrength();
-						do {
-							try{
-								Cesanek.attackTarget.setTroopStrength(Integer.valueOf((String) JOptionPane.showInputDialog(frame, new JLabel("<html><center>How many reinforcements would you like to send?</center></html>", JLabel.CENTER), "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null)));
-							} catch (java.lang.NumberFormatException e){
-								JOptionPane.showMessageDialog(frame, new JLabel("<html><center>You must enter a valid integer response</center></html>", JLabel.CENTER));
-							}
-							} while (Cesanek.attackTarget.getTroopStrength() < 1 || Cesanek.attackTarget.getTroopStrength() > Cesanek.attackSource.getTroopStrength());
-						Cesanek.attackSource.setTroopStrength(Cesanek.attackSource.getTroopStrength() - (Cesanek.attackTarget.getTroopStrength() - temp));
-						Cesanek.nextMode();
-						Cesanek.nextTurn();
+						if(Cesanek.attackSource.isNeighbor(t)){
+							int temp = Cesanek.attackTarget.getTroopStrength();
+							do {
+								try{
+									Cesanek.attackTarget.setTroopStrength(Integer.valueOf((String) JOptionPane.showInputDialog(frame, new JLabel("<html><center>How many reinforcements would you like to send?</center></html>", JLabel.CENTER), "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null)));
+								} catch (java.lang.NumberFormatException e){
+									JOptionPane.showMessageDialog(frame, new JLabel("<html><center>You must enter a valid integer response</center></html>", JLabel.CENTER));
+								}
+								} while (Cesanek.attackTarget.getTroopStrength() < 1 || Cesanek.attackTarget.getTroopStrength() > Cesanek.attackSource.getTroopStrength());
+							Cesanek.attackSource.setTroopStrength(Cesanek.attackSource.getTroopStrength() - (Cesanek.attackTarget.getTroopStrength() - temp));
+							Cesanek.nextMode();
+							Cesanek.nextTurn();
+						} else {
+							JOptionPane.showMessageDialog(frame, new JLabel("<html><center>You cannot perform this fortification because " + Cesanek.attackSource.getName() + " is not adjacent to " + Cesanek.attackTarget.getName() +"</center></html>", JLabel.CENTER));
+							Cesanek.setMode(5);
+						}
+
 					}
 				}
 			});
