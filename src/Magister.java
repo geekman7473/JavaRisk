@@ -1,5 +1,12 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -9,6 +16,7 @@ public class Magister {
 	private ArrayList<Player> players;
 	private int mode;
 	private JLabel curPlay;
+	private Clip attackSound;
 	private JLabel gameState;
 	public Territory attackSource;
 	public Territory attackTarget;
@@ -106,22 +114,28 @@ public class Magister {
 		gameState.setText("|| " +"Claim territory phase");
 		gameState.setSize(100, 30);
 	}
-	Magister(ArrayList<Player> a){
-		iterCount = 0;
-		players = a;
-		curPlay = new JLabel();
-		curPlay.setLocation(10,10);
-		curPlay.setText("Players not yet initialized");
-		curPlay.setSize(100, 30);
-		gameState = new JLabel();
-		gameState.setLocation(10,10);
-		gameState.setText("|| " + "Claim territory phase");
-		gameState.setSize(100, 30);
-	}
+
 	public JLabel getCurPlay() {
 		return curPlay;
 	}
 	public int getTurnCount(){
 		return iterCount;
+	}
+	public void playAttackSound(){
+		try {
+			attackSound = AudioSystem.getClip();
+		    AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("resources/Attack Sound.wav"));
+		    attackSound.open(inputStream);
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		attackSound.start();
 	}
 }

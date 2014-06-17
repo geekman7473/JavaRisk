@@ -113,7 +113,7 @@ public class Graphics {
 		frame.add(endAttacks);
 		
 		//Welcome players
-		JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Bienvenue dans le jeu du risque!  Jouir!</center></html>", JLabel.CENTER), "Welome", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Bienvenue dans La Conquête du Monde!  Jouir!</center></html>", JLabel.CENTER), "Welome", JOptionPane.PLAIN_MESSAGE);
 		
 		//Add players
 		//parent, message, title, message type, icon, options, default selected
@@ -178,10 +178,12 @@ public class Graphics {
 						Cesanek.nextMode();
 					} else if(!t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 4){
 						Cesanek.attackTarget = t;
-						while(!Cesanek.attackTarget.getOwnedBy().equals(Cesanek.attackSource.getOwnedBy()) && JOptionPane.showConfirmDialog(frame, new JLabel("<html><center>Do you wish to attack " + Cesanek.attackTarget.getName() + "(Strength: " + Cesanek.attackTarget.getTroopStrength() + ") from " + Cesanek.attackSource.getName() + " (Strength: " + Cesanek.attackSource.getTroopStrength() + ")</center></html>", JLabel.CENTER) , "Attack Confirmation", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+						while(!Cesanek.attackTarget.getOwnedBy().equals(Cesanek.attackSource.getOwnedBy()) && JOptionPane.showConfirmDialog(frame, "Do you wish to attack " + Cesanek.attackTarget.getName() + " (Strength: " + Cesanek.attackTarget.getTroopStrength() + ") from " + Cesanek.attackSource.getName() + " (Strength: " + Cesanek.attackSource.getTroopStrength() + ")" , "Attack Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.YES_NO_OPTION, new ImageIcon("resources/Die.png")) == JOptionPane.YES_OPTION){
 							if(Cesanek.attackSource.getTroopStrength() < 2){
 								JOptionPane.showMessageDialog(frame, new JLabel("<html><center>You cannot perform this attack because you do not have enough armies in" + Cesanek.attackSource.getName() + "</center></html>", JLabel.CENTER));
 							} else {
+								//Cesanek.stopAttackSound();
+								Cesanek.playAttackSound();
 								Cesanek.attackSource.attack(Cesanek.attackTarget);
 							}
 						}
@@ -207,6 +209,7 @@ public class Graphics {
 			});
 		}
 		
+		
 		//Claim territories stage
 		JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Select your territories, players. <br> The world is your oyster. <br> Which has been mutated to the point where it contains over 40 pearls. <br> Ouch.</center></html>", JLabel.CENTER), "Claim territories", JOptionPane.PLAIN_MESSAGE);
 		
@@ -228,6 +231,7 @@ public class Graphics {
 		Cesanek.nextMode();
 		
 		System.out.println("done 1");
+		
 		
 		//Debug mode - remark out previous two modes
 		/*
