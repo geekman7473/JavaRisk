@@ -52,9 +52,6 @@ public class Magister {
 			gameState.setText("|| " +"Initial Reinforcement Phase");
 		} else if(mode == 2){
 			gameState.setText("|| " +"Reinforcement Phase." + " You have " + currentPlayer().draftArmies(Graphics.territory, Graphics.continent) + " reinforcements to place");
-			JOptionPane.showMessageDialog(null, currentPlayer().draftArmies(Graphics.territory, Graphics.continent));
-			JOptionPane.showMessageDialog(null, currentPlayer().getName());
-			System.out.println(currentPlayer().getName());
 		}else if(mode == 3){
 			gameState.setText("|| " +"Attack Phase");
 		} else if (mode == 4){
@@ -81,9 +78,6 @@ public class Magister {
 			gameState.setText("|| " +"Initial Reinforcement Phase");
 		} else if(mode == 2){
 			gameState.setText("|| " +"Reinforcement Phase." + " You have " + currentPlayer().draftArmies(Graphics.territory, Graphics.continent) + " reinforcements to place");
-			JOptionPane.showMessageDialog(null, currentPlayer().draftArmies(Graphics.territory, Graphics.continent));
-			JOptionPane.showMessageDialog(null, currentPlayer().getName());
-			System.out.println(currentPlayer().getName());
 		}else if(mode == 3){
 			gameState.setText("|| " +"Attack Phase");
 		} else if (mode == 4){
