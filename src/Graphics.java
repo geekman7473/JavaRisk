@@ -96,6 +96,20 @@ public class Graphics {
 				Cesanek.setMode(5);
 			}
 		});
+		
+		final JButton endFort = new JButton();
+		endFort.setVisible(false);
+		endFort.setSize(100, 100);
+		endFort.setText("Skip Fortification");
+		endFort.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0){
+				Cesanek.setMode(1337);
+				Cesanek.nextMode();
+				Cesanek.nextTurn();
+			}
+		});
+		
+		frame.add(endFort);
 		frame.add(endAttacks);
 		
 		//Welcome players
@@ -107,6 +121,12 @@ public class Graphics {
 		do {
 			numPlayers = Integer.valueOf((String) JOptionPane.showInputDialog(frame, new JLabel("<html><center>How many players?</center></html>", JLabel.CENTER), "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null));
 			if (numPlayers > 6 || numPlayers < 2) JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Invalid number of players.</center></html>", JLabel.CENTER));
+			try{
+				numPlayers = Integer.valueOf((String) JOptionPane.showInputDialog(frame, "How many players?", "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null));
+			} catch (java.lang.NumberFormatException e){
+				JOptionPane.showMessageDialog(null, "You must enter a valid integer response");
+			}
+			if (numPlayers > 6 || numPlayers < 2) JOptionPane.showMessageDialog(frame, "Invalid number of players.");
 		} while (numPlayers > 6 || numPlayers < 2);
 		
 		Object[] colors = {"BLUE", "CYAN", "GREEN", "MAGENTA", "ORANGE", "PINK", "RED", "YELLOW"};
@@ -160,9 +180,9 @@ public class Graphics {
 						Cesanek.nextMode();
 					} else if(!t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 4){
 						Cesanek.attackTarget = t;
-						while(!Cesanek.attackTarget.getOwnedBy().equals(Cesanek.attackSource.getOwnedBy()) && JOptionPane.showConfirmDialog(frame, "Do you wish to attack " + Cesanek.attackTarget.getName() + " (Strength: " + Cesanek.attackTarget.getTroopStrength() + ") from " + Cesanek.attackSource.getName() + " (Strength: " + Cesanek.attackSource.getTroopStrength() + ")" , "Attack Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.YES_NO_OPTION, new ImageIcon("resources/Die.png")) == JOptionPane.YES_OPTION){
+						while(!Cesanek.attackTarget.getOwnedBy().equals(Cesanek.attackSource.getOwnedBy()) && JOptionPane.showConfirmDialog(null, "Do you wish to attack " + Cesanek.attackTarget.getName() + "(Strength: " + Cesanek.attackTarget.getTroopStrength() + ") from " + Cesanek.attackSource.getName() + " (Strength: " + Cesanek.attackSource.getTroopStrength() + ")" , "Attack Confirmation", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
 							if(Cesanek.attackSource.getTroopStrength() < 2){
-								JOptionPane.showMessageDialog(frame, "You cannot perform this attack because you do not have enough armies in " + Cesanek.attackSource.getName());
+								JOptionPane.showMessageDialog(null, "You cannot perform this attack because you do not have enough armies in " + Cesanek.attackSource.getName());
 							} else {
 								Cesanek.attackSource.attack(Cesanek.attackTarget);
 							}
@@ -175,8 +195,12 @@ public class Graphics {
 						Cesanek.attackTarget = t;
 						int temp = Cesanek.attackTarget.getTroopStrength();
 						do {
-							Cesanek.attackTarget.setTroopStrength(Integer.valueOf((String) JOptionPane.showInputDialog(frame, new JLabel("<html><center>How many reinforcements would you like to send?</center></html>", JLabel.CENTER), "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null)));
-						} while (Cesanek.attackTarget.getTroopStrength() < 1 || Cesanek.attackTarget.getTroopStrength() > Cesanek.attackSource.getTroopStrength());
+							try{
+								Cesanek.attackTarget.setTroopStrength(Integer.valueOf((String) JOptionPane.showInputDialog(Graphics.frame, "How many reinforcements would you like to send?", "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null)));
+							} catch (java.lang.NumberFormatException e){
+								JOptionPane.showMessageDialog(null, "You must enter a valid integer response");
+							}
+							} while (Cesanek.attackTarget.getTroopStrength() < 1 || Cesanek.attackTarget.getTroopStrength() > Cesanek.attackSource.getTroopStrength());
 						Cesanek.attackSource.setTroopStrength(Cesanek.attackSource.getTroopStrength() - (Cesanek.attackTarget.getTroopStrength() - temp));
 						Cesanek.nextMode();
 						Cesanek.nextTurn();
@@ -225,6 +249,11 @@ public class Graphics {
 				endAttacks.setVisible(true);
 			} else {
 				endAttacks.setVisible(false);
+			}
+			if(Cesanek.getMode() == 5 || Cesanek.getMode() == 6){
+				endFort.setVisible(true);
+			} else {
+				endFort.setVisible(false);
 			}
 		}
 		

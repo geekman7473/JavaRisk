@@ -71,26 +71,27 @@ public class Territory {
 	public AttackResult attack(Territory target){
 		//assumes that troop strength of attacking territory is > 1
 		Integer[] aDice, dDice;
-		if(troopStrength > 3){
+		if(this.troopStrength > 3){
 			aDice = new Integer[3];
 		} else{
-			aDice = new Integer[troopStrength - 1];
+			aDice = new Integer[this.troopStrength - 1];
 		}
 		
-		if(target.getTroopStrength() > 3){
-			dDice = new Integer[3];
-		} else if(target.getTroopStrength() == 1){
-			dDice = new Integer[1];
+		if(target.getTroopStrength() > 1){
+			dDice = new Integer[2];
 		} else {
-			dDice = new Integer[target.getTroopStrength() - 1];
+			dDice = new Integer[1];
 		}
-		
+
 		for(int i = 0; i < aDice.length; i++){
 			aDice[i] = Util.diceRoll();
 		}
 		for(int i = 0; i < dDice.length; i++){
 			dDice[i] = Util.diceRoll();
 		}
+		System.out.println("Attacking Dice: " + aDice.toString());
+		System.out.println("Defending Dice: " + dDice.toString());
+		
 		AttackResult res = new AttackResult(aDice,dDice);
 		System.out.println(aDice.length);
 		System.out.println(dDice.length);
@@ -101,7 +102,11 @@ public class Territory {
 			target.troopStrength = 0;
 			target.setOwnedBy(this.ownedBy);
 			do {
-				target.setTroopStrength(Integer.valueOf((String) JOptionPane.showInputDialog(Graphics.frame, "How many reinforcements would you like to send?", "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null)));
+				try{
+					target.setTroopStrength(Integer.valueOf((String) JOptionPane.showInputDialog(Graphics.frame, "How many reinforcements would you like to send?", "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null)));
+				}catch (java.lang.NumberFormatException e){
+					JOptionPane.showMessageDialog(null, "You must enter a valid integer response");
+				}
 			} while (target.getTroopStrength() < 1 || target.getTroopStrength() > this.troopStrength);
 			this.setTroopStrength(this.getTroopStrength() - target.getTroopStrength());
 		}
