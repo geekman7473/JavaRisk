@@ -119,8 +119,6 @@ public class Graphics {
 		//parent, message, title, message type, icon, options, default selected
 		int numPlayers = 0;
 		do {
-			numPlayers = Integer.valueOf((String) JOptionPane.showInputDialog(frame, new JLabel("<html><center>How many players?</center></html>", JLabel.CENTER), "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null));
-			if (numPlayers > 6 || numPlayers < 2) JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Invalid number of players.</center></html>", JLabel.CENTER));
 			try{
 				numPlayers = Integer.valueOf((String) JOptionPane.showInputDialog(frame, new JLabel("<html><center>How many players?</center></html>", JLabel.CENTER), "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null));
 			} catch (java.lang.NumberFormatException e){
@@ -209,6 +207,7 @@ public class Graphics {
 			});
 		}
 		
+		/*
 		//Claim territories stage
 		JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Select your territories, players. <br> The world is your oyster. <br> Which has been mutated to the point where it contains over 40 pearls. <br> Ouch.</center></html>", JLabel.CENTER), "Claim territories", JOptionPane.PLAIN_MESSAGE);
 		
@@ -230,15 +229,16 @@ public class Graphics {
 		Cesanek.nextMode();
 		
 		System.out.println("done 1");
+		*/
 		
 		//Debug mode - remark out previous two modes
-		/*
+		
 		territory[0].setOwnedBy(Cesanek.getPlayers().get(0));
 		territory[0].setTroopStrength(40);
 		territory[1].setOwnedBy(Cesanek.getPlayers().get(1));
 		territory[1].setTroopStrength(40);
 		Cesanek.setMode(3);
-		*/
+		
 		
 		//Begin game
 		JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Fantastic.  Let the game begin!</center></html>", JLabel.CENTER), "Initium", JOptionPane.PLAIN_MESSAGE);
