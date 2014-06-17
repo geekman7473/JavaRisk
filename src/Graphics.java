@@ -207,7 +207,6 @@ public class Graphics {
 			});
 		}
 		
-		/*
 		//Claim territories stage
 		JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Select your territories, players. <br> The world is your oyster. <br> Which has been mutated to the point where it contains over 40 pearls. <br> Ouch.</center></html>", JLabel.CENTER), "Claim territories", JOptionPane.PLAIN_MESSAGE);
 		
@@ -229,7 +228,6 @@ public class Graphics {
 		Cesanek.nextMode();
 		
 		System.out.println("done 1");
-		*/
 		
 		//Debug mode - remark out previous two modes
 		/*
