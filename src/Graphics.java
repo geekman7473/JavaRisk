@@ -109,6 +109,9 @@ public class Graphics {
 		});
 		frame.add(endAttacks);
 		
+		//Welcome players
+		JOptionPane.showMessageDialog(frame, "Bienvenue a le jeu du risque!  Jouir!", "Welome", JOptionPane.PLAIN_MESSAGE);
+		
 		//Add players
 		//parent, message, title, message type, icon, options, default selected
 		int numPlayers = 0;
@@ -134,7 +137,7 @@ public class Graphics {
 		for(final Player p: Cesanek.getPlayers()){
 			p.setTroops(50-5*Cesanek.getPlayers().size());
 		}
-		
+
 		//Add button action listeners
 		for(final Territory t: territory){
 			t.getButton().addActionListener(new ActionListener(){
@@ -194,7 +197,8 @@ public class Graphics {
 		}
 		
 		//Claim territories stage
-		JOptionPane.showMessageDialog(frame, "Select your territories, players.  The world is your oyster.  Which has been mutated to the point where it contains over 40 pearls.  Ouch.", "Claim territories", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(frame, "Select your territories, players. \n The world is your oyster. \n Which has been mutated to the point where it contains over 40 pearls. \n Ouch.", "Claim territories", JOptionPane.PLAIN_MESSAGE);
+		
 		do{
 			frame.repaint();
 		} while(!Util.allTerritoriesTaken(territory));
@@ -204,7 +208,7 @@ public class Graphics {
 		System.out.println("done 0");
 		
 		//Add troops stage
-		JOptionPane.showMessageDialog(frame, "Great!  Now add your troops.  A well-placed army means a well-placed empire.  Among the rest, I mean.  Assuming there are any left.  I won't judge if world domination is your thing.", "Add troops", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(frame, "Great! \n Now add your troops. /n  A well-placed army means a well-placed empire. \n Among the rest, I mean. \n Assuming there are any left. \n I won't judge if world domination is your thing.", "Add troops", JOptionPane.PLAIN_MESSAGE);
 		
 		do{
 			frame.repaint();
@@ -214,6 +218,9 @@ public class Graphics {
 		
 		System.out.println("done 1");
 		
+		//Begin game
+		JOptionPane.showMessageDialog(frame, "Fantastic.  Let the game begin!", "Initium", JOptionPane.PLAIN_MESSAGE);
+
 		while(!Util.gameOver(territory)){
 			frame.repaint();
 			if(Cesanek.getMode() == 3 || Cesanek.getMode() == 4){
@@ -222,5 +229,8 @@ public class Graphics {
 				endAttacks.setVisible(false);
 			}
 		}
+		
+		//End game
+		JOptionPane.showMessageDialog(frame, "Congratulations " + territory[0].getOwnedBy().getName() + "!  You have won the game!", "Finis", JOptionPane.PLAIN_MESSAGE);
 	}
 }
