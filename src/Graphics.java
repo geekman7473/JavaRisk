@@ -107,6 +107,7 @@ public class Graphics {
 				Cesanek.setMode(5);
 			}
 		});
+		frame.add(endAttacks);
 		
 		//Add players
 		//parent, message, title, message type, icon, options, default selected

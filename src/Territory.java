@@ -103,8 +103,11 @@ public class Territory {
 			do {
 				target.setTroopStrength(Integer.valueOf((String) JOptionPane.showInputDialog(Graphics.frame, "How many reinforcements would you like to send?", "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null)));
 			} while (target.getTroopStrength() < 1 || target.getTroopStrength() > this.troopStrength);
-			this.troopStrength -= target.getTroopStrength();
+			this.setTroopStrength(this.getTroopStrength() - target.getTroopStrength());
 		}
+		
+		this.troopCount.setText(Integer.valueOf(this.troopStrength).toString());
+		target.troopCount.setText(Integer.valueOf(target.troopStrength).toString());
 		
 		return res;
 	}

@@ -11,7 +11,10 @@ public class Util {
 		return temp;
 	}
 	public static Integer diceRoll(){
-		return (int)Math.round((Math.random() * 6));
+		
+		int temp =(int)Math.round((Math.random() * 6));
+		System.out.println("Dice: " + temp);
+		return temp;
 	}
 	public static boolean allTerritoriesTaken(Territory[] a){
 		for(int i = 0; i < a.length; i++){
