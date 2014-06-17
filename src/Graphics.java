@@ -93,9 +93,11 @@ public class Graphics {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+
+		
 		//Master class
 		final Magister Cesanek = new Magister();
-		
+		frame.add(Cesanek.getCurPlay());
 		//Add players
 		//parent, message, title, message type, icon, options, default selected
 		int numPlayers = 0;
@@ -117,7 +119,6 @@ public class Graphics {
 				}
 			}			
 		}
-		
 		//Add button action listeners
 		for(final Territory t: territory){
 			t.getButton().addActionListener(new ActionListener(){
