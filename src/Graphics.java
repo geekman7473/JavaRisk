@@ -95,7 +95,7 @@ public class Graphics {
 		
 		//Master class
 		final Magister Cesanek = new Magister();
-		
+		frame.add(Cesanek.getCurPlay());
 		//Add players
 		//parent, message, title, message type, icon, options, default selected
 		int numPlayers = 0;
@@ -117,6 +117,7 @@ public class Graphics {
 				}
 			}			
 		}
+
 		for(final Player p: Cesanek.getPlayers()){
 			p.setTroops(50-5*Cesanek.getPlayers().size());
 		}
