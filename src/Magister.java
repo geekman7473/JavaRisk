@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 public class Magister {
@@ -29,7 +30,11 @@ public class Magister {
 	public Player currentPlayer(){
 		return players.get(iterCount % players.size());
 	}
+	public Player nextPlayer(){
+		return players.get((iterCount + 1) % players.size());
+	}
 	public void nextTurn(){
+		setMode(getMode());
 		iterCount++;
 		curPlay.setText("It is " + this.currentPlayer().getName()+ "'s turn");
 	}
@@ -47,6 +52,9 @@ public class Magister {
 			gameState.setText("|| " +"Initial Reinforcement Phase");
 		} else if(mode == 2){
 			gameState.setText("|| " +"Reinforcement Phase." + " You have " + currentPlayer().draftArmies(Graphics.territory, Graphics.continent) + " reinforcements to place");
+			JOptionPane.showMessageDialog(null, currentPlayer().draftArmies(Graphics.territory, Graphics.continent));
+			JOptionPane.showMessageDialog(null, currentPlayer().getName());
+			System.out.println(currentPlayer().getName());
 		}else if(mode == 3){
 			gameState.setText("|| " +"Attack Phase");
 		} else if (mode == 4){
@@ -72,7 +80,10 @@ public class Magister {
 		} else if(mode == 1){
 			gameState.setText("|| " +"Initial Reinforcement Phase");
 		} else if(mode == 2){
-			gameState.setText("|| " +"Reinforcement Phase");
+			gameState.setText("|| " +"Reinforcement Phase." + " You have " + currentPlayer().draftArmies(Graphics.territory, Graphics.continent) + " reinforcements to place");
+			JOptionPane.showMessageDialog(null, currentPlayer().draftArmies(Graphics.territory, Graphics.continent));
+			JOptionPane.showMessageDialog(null, currentPlayer().getName());
+			System.out.println(currentPlayer().getName());
 		}else if(mode == 3){
 			gameState.setText("|| " +"Attack Phase");
 		} else if (mode == 4){

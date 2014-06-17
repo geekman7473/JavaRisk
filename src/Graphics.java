@@ -107,13 +107,31 @@ public class Graphics {
 				Cesanek.setMode(5);
 			}
 		});
+		
+		final JButton endFort = new JButton();
+		endFort.setVisible(false);
+		endFort.setSize(100, 100);
+		endFort.setText("Skip Fortification");
+		endFort.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0){
+				Cesanek.setMode(1337);
+				Cesanek.nextMode();
+				Cesanek.nextTurn();
+			}
+		});
+		
+		frame.add(endFort);
 		frame.add(endAttacks);
 		
 		//Add players
 		//parent, message, title, message type, icon, options, default selected
 		int numPlayers = 0;
 		do {
-			numPlayers = Integer.valueOf((String) JOptionPane.showInputDialog(frame, "How many players?", "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null));
+			try{
+				numPlayers = Integer.valueOf((String) JOptionPane.showInputDialog(frame, "How many players?", "Setup", JOptionPane.PLAIN_MESSAGE, null, null, null));
+			} catch (java.lang.NumberFormatException e){
+				JOptionPane.showMessageDialog(null, "You must enter a valid integer response");
+			}
 			if (numPlayers > 6 || numPlayers < 2) JOptionPane.showMessageDialog(frame, "Invalid number of players.");
 		} while (numPlayers > 6 || numPlayers < 2);
 		
@@ -183,8 +201,12 @@ public class Graphics {
 						Cesanek.attackTarget = t;
 						int temp = Cesanek.attackTarget.getTroopStrength();
 						do {
-							Cesanek.attackTarget.setTroopStrength(Integer.valueOf((String) JOptionPane.showInputDialog(Graphics.frame, "How many reinforcements would you like to send?", "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null)));
-						} while (Cesanek.attackTarget.getTroopStrength() < 1 || Cesanek.attackTarget.getTroopStrength() > Cesanek.attackSource.getTroopStrength());
+							try{
+								Cesanek.attackTarget.setTroopStrength(Integer.valueOf((String) JOptionPane.showInputDialog(Graphics.frame, "How many reinforcements would you like to send?", "Reinforcements", JOptionPane.PLAIN_MESSAGE, null, null, null)));
+							} catch (java.lang.NumberFormatException e){
+								JOptionPane.showMessageDialog(null, "You must enter a valid integer response");
+							}
+							} while (Cesanek.attackTarget.getTroopStrength() < 1 || Cesanek.attackTarget.getTroopStrength() > Cesanek.attackSource.getTroopStrength());
 						Cesanek.attackSource.setTroopStrength(Cesanek.attackSource.getTroopStrength() - (Cesanek.attackTarget.getTroopStrength() - temp));
 						Cesanek.nextMode();
 						Cesanek.nextTurn();
@@ -220,6 +242,11 @@ public class Graphics {
 				endAttacks.setVisible(true);
 			} else {
 				endAttacks.setVisible(false);
+			}
+			if(Cesanek.getMode() == 5 || Cesanek.getMode() == 6){
+				endFort.setVisible(true);
+			} else {
+				endFort.setVisible(false);
 			}
 		}
 	}
