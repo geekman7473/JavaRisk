@@ -189,6 +189,11 @@ public class Graphics {
 						Cesanek.nextMode();
 						Cesanek.nextTurn();
 					}
+					if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 2){
+						t.setTroopStrength(t.getTroopStrength()+1);
+						Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
+						Cesanek.nextTurn();
+					}
 				}
 			});
 		}
@@ -211,10 +216,10 @@ public class Graphics {
 		} while(Cesanek.getPlayers().get(Cesanek.getPlayers().size()-1).getTroops()>0);
 		
 		Cesanek.nextMode();
+		
 		System.out.println("done 1");
 		
 		while(!Util.gameOver(territory)){
 		}
-
 	}
 }
