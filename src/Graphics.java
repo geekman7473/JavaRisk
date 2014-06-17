@@ -29,7 +29,6 @@ public class Graphics {
 		frame.add(board);
 		
 		//Territories
-		
 		territory[0].addNeighbors(new Territory[]{territory[5], territory[1], territory[31]});
 		territory[1].addNeighbors(new Territory[]{territory[0], territory[5], territory[6], territory[8]});
 		territory[2].addNeighbors(new Territory[]{territory[3], territory[8], territory[12]});
@@ -108,6 +107,7 @@ public class Graphics {
 				Cesanek.setMode(5);
 			}
 		});
+		
 		//Add players
 		//parent, message, title, message type, icon, options, default selected
 		int numPlayers = 0;
@@ -129,7 +129,7 @@ public class Graphics {
 				}
 			}			
 		}
-
+		
 		for(final Player p: Cesanek.getPlayers()){
 			p.setTroops(50-5*Cesanek.getPlayers().size());
 		}
@@ -145,11 +145,11 @@ public class Graphics {
 						t.setTroopStrength(t.getTroopStrength()+1);
 						Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
 						Cesanek.nextTurn();
-					}else if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 1){
+					} else if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 1){
 						t.setTroopStrength(t.getTroopStrength()+1);
 						Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
 						Cesanek.nextTurn();
-					}else if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 2){
+					} else if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 2){
 						if(lastTurnNum != Cesanek.getTurnCount()){
 							System.out.println("turns");
 							System.out.println(lastTurnNum);
@@ -162,11 +162,10 @@ public class Graphics {
 						if(Cesanek.currentPlayer().getTroops() == 0){
 							Cesanek.nextMode();
 						}
-					}else if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 3){
-						endAttacks.setVisible(true);
+					} else if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 3){
 						Cesanek.attackSource = t;
 						Cesanek.nextMode();
-					}else if(!t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 4){
+					} else if(!t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 4){
 						Cesanek.attackTarget = t;
 						while(!Cesanek.attackTarget.getOwnedBy().equals(Cesanek.attackSource.getOwnedBy()) && JOptionPane.showConfirmDialog(null, "Do you wish to attack " + Cesanek.attackTarget.getName() + "(Strength: " + Cesanek.attackTarget.getTroopStrength() + ") from " + Cesanek.attackSource.getName() + " (Strength: " + Cesanek.attackSource.getTroopStrength() + ")" , "Attack Confirmation", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
 							if(Cesanek.attackSource.getTroopStrength() < 2){
@@ -187,11 +186,6 @@ public class Graphics {
 						} while (Cesanek.attackTarget.getTroopStrength() < 1 || Cesanek.attackTarget.getTroopStrength() > Cesanek.attackSource.getTroopStrength());
 						Cesanek.attackSource.setTroopStrength(Cesanek.attackSource.getTroopStrength() - (Cesanek.attackTarget.getTroopStrength() - temp));
 						Cesanek.nextMode();
-						Cesanek.nextTurn();
-					}
-					if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 2){
-						t.setTroopStrength(t.getTroopStrength()+1);
-						Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
 						Cesanek.nextTurn();
 					}
 				}
@@ -220,6 +214,12 @@ public class Graphics {
 		System.out.println("done 1");
 		
 		while(!Util.gameOver(territory)){
+			frame.repaint();
+			if(Cesanek.getMode() == 3 || Cesanek.getMode() == 4){
+				endAttacks.setVisible(true);
+			} else {
+				endAttacks.setVisible(false);
+			}
 		}
 	}
 }
