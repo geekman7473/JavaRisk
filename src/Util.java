@@ -21,4 +21,14 @@ public class Util {
 		}
 		return true;
 	}
+	public static boolean gameOver(Territory[] a){
+		Territory temp = new Territory();
+		temp = a[0];
+		for(Territory I: a){
+			if(!temp.getOwnedBy().equals(I.getOwnedBy())){
+				return false;
+			}
+		}
+		return true;
+	}
 }
