@@ -139,6 +139,11 @@ public class Graphics {
 						Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
 						Cesanek.nextTurn();
 					}
+					if(t.getOwnedBy().equals(Cesanek.currentPlayer()) && Cesanek.getMode() == 2){
+						t.setTroopStrength(t.getTroopStrength()+1);
+						Cesanek.currentPlayer().setTroops(Cesanek.currentPlayer().getTroops()-1);
+						Cesanek.nextTurn();
+					}
 				}
 			});
 		}
@@ -163,5 +168,14 @@ public class Graphics {
 		Cesanek.nextMode();
 		
 		System.out.println("done 1");
+		
+		//Add reinforcements stage
+		JOptionPane.showMessageDialog(frame, "Fantastic.  The reinforcements have arrived.  They await your instruction!  Don't leave them waiting!  Please!  They have guns!", "Add reinforcements", JOptionPane.PLAIN_MESSAGE);
+		for(final Player p: Cesanek.getPlayers()){
+			p.setTroops(0);
+		}
+		do{
+			frame.repaint();
+		} while(Cesanek.getPlayers().get(Cesanek.getPlayers().size()-1).getTroops()>0);
 	}
 }
