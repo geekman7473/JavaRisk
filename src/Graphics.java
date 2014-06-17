@@ -232,13 +232,13 @@ public class Graphics {
 		*/
 		
 		//Debug mode - remark out previous two modes
-		
+		/*
 		territory[0].setOwnedBy(Cesanek.getPlayers().get(0));
 		territory[0].setTroopStrength(40);
 		territory[1].setOwnedBy(Cesanek.getPlayers().get(1));
 		territory[1].setTroopStrength(40);
 		Cesanek.setMode(3);
-		
+		*/
 		
 		//Begin game
 		JOptionPane.showMessageDialog(frame, new JLabel("<html><center>Fantastic.  Let the game begin!</center></html>", JLabel.CENTER), "Initium", JOptionPane.PLAIN_MESSAGE);
