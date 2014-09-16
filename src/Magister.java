@@ -10,6 +10,17 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+//#OneBigHair
+//Remember, Remember the 16th of September
+//Programming for no reason and whatnot
+//I see no reason why the programming reason ever was forgot
+
+//no but seriously what the hell are we doing?
+//Sincerely,
+//Amir and Justin
+//FTC Mentors
+
+//Au revoir!
 
 public class Magister {
 	private int iterCount;
